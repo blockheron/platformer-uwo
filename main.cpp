@@ -11,7 +11,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Platformer");
     sf::Clock gameClock; //start the game clock to time physics
 
-    Player* player = new Player();
+    Player* player = new Player(window.getSize());
 
     while (window.isOpen())
     {
