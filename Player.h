@@ -1,5 +1,6 @@
 //
 // Created by Liam on 2023-10-18.
+// Edited by Karen 2023/11/06
 //
 
 #ifndef PLATFORMER_PLAYER_H
@@ -12,6 +13,11 @@ public:
     Player(sf::Vector2<unsigned int> windowSize);
     void Update(int timeElapsed);
     sf::Shape* getShape();
+    void setToMove(bool val);
+   // bool getToMove();
+    int getPositionX();
+    int getPositionY();
+
 private:
     sf::RectangleShape* shape;
     const float speed = 0.002;
@@ -26,6 +32,7 @@ private:
     float vy = 0;
     float ay = 0;
     bool jumped = false;
+    bool toMove=true;
 };
 
 
