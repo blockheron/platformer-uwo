@@ -1,3 +1,7 @@
+//
+// Created by Liam on 2023-10-18.
+// Edited by Karen 11/5/2023.
+//
 #include "Level.h"
 #include <iostream>
 
@@ -7,6 +11,11 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
 
     gameClock; //start the game clock to time physics
     player = new Player(window->getSize()); //initialize player
+    obstacle = new obstacles(); //initialize obstacle
+    obstacle2 = new obstacles(); //initialize obstacle
+    obstacle3 = new obstacles(); //initialize obstacle
+    obstacle4 = new obstacles(); //initialize obstacle
+    collisions* collision = new collisions( player, obstacle); // Create collision instance
 
     while (window->isOpen())
     {
@@ -25,11 +34,27 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
         //get the time elapsed since last frame
         int elapsed = gameClock.restart().asMicroseconds();
 
-        // update the objects in the game
-        player->Update(elapsed);
+        collision->check(); // Check for collision
+        // Player does nto move if there's a collision
+        if(!collision->getCollisionCheck() ){
+            player->Update(elapsed);
+        } else{
+           player->setToMove(false);
+        }
+
+
+        // Show the obstacles in the game
+        obstacle->show(250.f, 545.f);
+        obstacle3->show(250.f, 345.f);
+        obstacle2->show(500.f, 545.f);
+        obstacle4->show(500.f, 345.f);
 
         //draw the objects in the game
         window->draw(*player->getShape());
+        window->draw(*obstacle->getShape());
+        window->draw(*obstacle2->getShape());
+        window->draw(*obstacle3->getShape());
+        window->draw(*obstacle4->getShape());
 
         // end the current frame
         window->display();
