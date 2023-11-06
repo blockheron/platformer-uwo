@@ -10,7 +10,7 @@
 
 class Level {
 public:
-    Level(sf::RenderWindow*);
+    Level(std::shared_ptr<sf::RenderWindow> window);
 private:
     sf::Clock gameClock;
     Player* player;

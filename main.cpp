@@ -1,21 +1,33 @@
-/**
- * This is a test comment to commit and push.
- */
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "Player.h"
 #include "Level.h"
+#include "Interface.h"
 
 using namespace std;
 
 int main() {
 
     //https://www.sfml-dev.org/tutorials/2.6/graphics-draw.php
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Platformer");
 
-    Level* level = new Level(&window);
+    shared_ptr<sf::RenderWindow> mainWindow(nullptr);
+
+    mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(800, 600), "Main Menu");
+
+    while (mainWindow->isOpen())
+    {
+        int select = MainMenu(mainWindow);
+        /*
+         * We will have different selections available in main menu. For now just a play button.
+         */
+        if (!mainWindow->isOpen()||select == 0) {
+            break;
+        }
+        else if (select == 2) {
+            Level* level = new Level(mainWindow);
+        }
+    }
 
     return 0;
 

@@ -17,21 +17,21 @@ Player::Player(sf::Vector2<unsigned int> windowSize) {
 void Player::Update(int timeElapsed) {
     timeElapsed *= simSpeed;
     //left and right motion
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shape->getPosition().x-speed*timeElapsed > lowerXBound) {
+    if((sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) && shape->getPosition().x-speed*timeElapsed > lowerXBound) {
         shape->move(-speed*timeElapsed, 0);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) && shape->getPosition().x-speed*timeElapsed < upperXBound) {
+    if((sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) && shape->getPosition().x-speed*timeElapsed < upperXBound) {
         shape->move(speed*timeElapsed, 0);
     }
     //
 
     //initial jump
-    if(!jumped && ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space)))) {
+    if(!jumped && (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))) {
         vy = initialJumpVelocity;
         jumped = true;
     }
     //midair control (jump higher/delay landing)
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         ay = midJumpAcceleration+gravity;
     }
     else ay = gravity;
