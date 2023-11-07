@@ -4,8 +4,8 @@
 // Main Menu, Pause Menu, Settings Menu, Any End Screens/Game Over Screens, Option/Help Menu, etc.
 //
 
-#ifndef _INTERFACE_H
-#define _INTERFACE_H
+#ifndef PLATFORMER_MENU_H
+#define PLATFORMER_MENU_H
 
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -14,4 +14,4 @@ int MainMenu(std::shared_ptr<sf::RenderWindow> window);
 int GameOver(std::shared_ptr<sf::RenderWindow> window);
 int LevelComplete(std::shared_ptr<sf::RenderWindow> window);
 
-#endif //_INTERFACE_H
+#endif //PLATFORMER_MENU_H

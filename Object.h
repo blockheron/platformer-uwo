@@ -9,8 +9,8 @@
  * We could have Players/other animate objects just inherit from two different classes as well.
  */
 
-#ifndef _OBJECT_H
-#define _OBJECT_H
+#ifndef PLATFORMER_OBJECT_H
+#define PLATFORMER_OBJECT_H
 
 #include <SFML/Graphics.hpp>
 
@@ -26,4 +26,4 @@ protected:
     sf::RectangleShape* shape;
 };
 
-#endif //_OBJECT_H
+#endif //PLATFORMER_OBJECT_H
