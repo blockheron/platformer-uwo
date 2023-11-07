@@ -1,6 +1,7 @@
 //
 // Created by Liam on 2023-10-18.
 // Edited by Karen 2023/11/06
+// Edited by Jake 2023/11/06
 //
 
 #include <iostream>
@@ -8,8 +9,7 @@
 
 using namespace std;
 
-Player::Player(sf::Vector2<unsigned int> windowSize) {
-    shape = new sf::RectangleShape(sf::Vector2f(50.f,50.f));
+Player::Player(sf::Vector2<unsigned int> windowSize, sf::Vector2f size) : Object(size) {
     lowerYBound = windowSize.y-shape->getSize().y;
     shape->move(0, lowerYBound);
 }
@@ -58,20 +58,6 @@ void Player::Update(int timeElapsed) {
         //
     }
 
-}
-
-sf::Shape* Player::getShape() {
-    return shape;
-}
-
-// Return Player x position
-int Player::getPositionX(){
-    return shape->getPosition().x;
-}
-
-// Return Player y position
-int Player::getPositionY(){
-    return shape->getPosition().y;
 }
 
 //Set boolean to indicate whether player can move(has not encountered obstacle)

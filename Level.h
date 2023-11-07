@@ -1,6 +1,7 @@
 //
 // Created by Liam on 2023-11-04.
 // Edited by Karen on 2023/11/05
+// Edited by Jake 2023/11/06
 //
 
 #ifndef PLATFORMER_LEVEL_H
@@ -9,20 +10,19 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "Player.h"
-#include "obstacles.h"
-#include "collisions.h"
+#include "Obstacle.h"
+#include "Goal.h"
 
 class Level {
 public:
     Level(std::shared_ptr<sf::RenderWindow> window);
+    int play(std::shared_ptr<sf::RenderWindow> window);
 private:
     //Initialize needed variables
     sf::Clock gameClock;
     Player* player;
-    obstacles* obstacle;
-    obstacles* obstacle2;
-    obstacles* obstacle3;
-    obstacles* obstacle4;
+    std::vector<Object*> deathObjects;
+    Goal* goal;
     sf::View* camera;
 };
 

@@ -1,6 +1,7 @@
 //
 // Created by Liam on 2023-10-18.
 // Edited by Karen 11/5/2023.
+// Edited by Jake 2023/11/06
 //
 #include "Level.h"
 #include <iostream>
@@ -10,14 +11,21 @@ using namespace std;
 Level::Level(shared_ptr<sf::RenderWindow> window) {
 
     gameClock; //start the game clock to time physics
-    player = new Player(window->getSize()); //initialize player
-    obstacle = new obstacles(); //initialize obstacle
-    obstacle2 = new obstacles(); //initialize obstacle
-    obstacle3 = new obstacles(); //initialize obstacle
-    obstacle4 = new obstacles(); //initialize obstacle
-    collisions* collision = new collisions(player, obstacle); // Create collision instance
+    player = new Player(window->getSize(), sf::Vector2f(50.f, 50.f)); //initialize player
+
+    // Create obstacles that player must avoid.
+    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(500.f, 470.f)));
+    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 100.f), sf::Vector2f(1000.f, 500.f)));
+    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 100.f), sf::Vector2f(1500.f, 500.f)));
+    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(2000.f, 460.f)));
+
+    goal = new Goal(sf::Vector2f(100.f, 600.f), sf::Vector2f(2800.f, 0.f));
+
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
+}
+
+int Level::play(shared_ptr<sf::RenderWindow> window) {
     while (window->isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
@@ -35,20 +43,23 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
         //get the time elapsed since last frame
         int elapsed = gameClock.restart().asMicroseconds();
 
-        collision->check(); // Check for collision
-        // Player does nto move if there's a collision
-        if(!collision->getCollisionCheck() ){
-            player->Update(elapsed);
-        } else{
-           player->setToMove(false);
+        bool deathCollision = false;
+
+        for (int i=0; i<deathObjects.size(); i++) {
+            /**
+             * Want to change to checking first if in current view, then check for collision.
+             * Will leave for later.
+             */
+            if (player->collides(deathObjects.at(i))) {
+                return 0;
+            }
         }
 
+        if (player->collides(goal) || player->getPositionX() > 2800.f) {
+            return 1;
+        }
 
-        // Show the obstacles in the game
-        obstacle->show(250.f, 545.f);
-        obstacle3->show(250.f, 345.f);
-        obstacle2->show(500.f, 545.f);
-        obstacle4->show(500.f, 345.f);
+        player->Update(elapsed);
 
         //center the camera on the player
         camera->setCenter(sf::Vector2<float>(player->getShape()->getPosition().x, camera->getCenter().y));
@@ -56,15 +67,12 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
 
         //draw the objects in the game
         window->draw(*player->getShape());
-        window->draw(*obstacle->getShape());
-        window->draw(*obstacle2->getShape());
-        window->draw(*obstacle3->getShape());
-        window->draw(*obstacle4->getShape());
+        for (int i=0; i<deathObjects.size(); i++) {
+            window->draw(*deathObjects.at(i)->getShape());
+        }
+        window->draw(*goal->getShape());
 
         // end the current frame
         window->display();
     }
-
-    return;
-
 }
