@@ -8,6 +8,28 @@ This program requires downloading SFML 2.6.0 or later. Please click [here](https
 
 Currently our program has been tested on Windows and Intel-based Macs.
 
+To run on an application CLion, copy and paste the following in your CMakeLists.txt to build and run the program properly.
+
+#### For Windows:
+```
+
+```
+
+#### For Mac:
+```
+cmake_minimum_required(VERSION 3.23)
+project(group14)
+
+set(CMAKE_CXX_STANDARD 17)
+
+include_directories(/usr/local/include)
+include_directories(${SFML_INCLUDE_DIRS})
+
+find_package(SFML 2.6 COMPONENTS graphics audio system window REQUIRED)
+add_executable(group14 main.cpp Player.cpp Player.h Level.cpp Level.h Menu.h Menu.cpp Obstacle.h Obstacle.cpp Object.h Object.cpp Goal.h Goal.cpp)
+target_link_libraries(group14 sfml-graphics sfml-audio sfml-system sfml-window)
+```
+
 ### Executing Program
 
 To run the program, open the specific build folder and ensure it's in the main directory.
