@@ -25,10 +25,12 @@ int main() {
     mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Platformer");
     sf::View* defaultCamera = new sf::View(sf::FloatRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT));
 
+    int select;
+
     while (mainWindow->isOpen())
     {
         mainWindow->setView(*defaultCamera);
-        int select = MainMenu(mainWindow);
+        select = MainMenu(mainWindow);
         /*
          * We will have different selections available in main menu. For now just a play button.
          */
@@ -37,6 +39,33 @@ int main() {
         }
         else if (select == 2) {
             Level* level = new Level(mainWindow);
+            int gameEvent = level->play(mainWindow);
+            if (gameEvent == 0) {
+                mainWindow->setView(*defaultCamera);
+                select = GameOver(mainWindow);
+                if (select == 0) {
+                    continue;
+                }
+                else if (select == 1) {
+                    mainWindow->close();
+                    break;
+                }
+            }
+            else if (gameEvent == 1) {
+                mainWindow->setView(*defaultCamera);
+                select = LevelComplete(mainWindow);
+                if (select == 0) {
+                    continue;
+                }
+                else if (select == 1) {
+                    mainWindow->close();
+                    break;
+                }
+            }
+            else if (gameEvent == 2) {
+                // player paused game...will be implemented later
+                ;
+            }
         }
     }
 

@@ -14,14 +14,18 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
     player = new Player(window->getSize(), sf::Vector2f(50.f, 50.f)); //initialize player
 
     // Create obstacles that player must avoid.
-    vector<Object*> deathObjects;
     deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(500.f, 470.f)));
     deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(1000.f, 500.f)));
     deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(1500.f, 500.f)));
     deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(2000.f, 460.f)));
 
+    goal = new Goal(sf::Vector2f(100.f, 600.f), sf::Vector2f(2800.f, 0.f));
+
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
+}
+
+int Level::play(shared_ptr<sf::RenderWindow> window) {
     while (window->isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
@@ -39,26 +43,23 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
         //get the time elapsed since last frame
         int elapsed = gameClock.restart().asMicroseconds();
 
-        bool collision = false;
+        bool deathCollision = false;
 
         for (int i=0; i<deathObjects.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
              * Will leave for later.
              */
-             if (player->collides(deathObjects.at(i))) {
-                 collision = true;
-                 break;
-             }
+            if (player->collides(deathObjects.at(i))) {
+                return 0;
+            }
         }
 
-        // Player does not move if there's a collision
-        if(!collision){
-            player->Update(elapsed);
-        } else{
-           player->setToMove(false);
+        if (player->collides(goal) || player->getPositionX() > 2800.f) {
+            return 1;
         }
 
+        player->Update(elapsed);
 
         //center the camera on the player
         camera->setCenter(sf::Vector2<float>(player->getShape()->getPosition().x, camera->getCenter().y));
@@ -69,11 +70,9 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
         }
+        window->draw(*goal->getShape());
 
         // end the current frame
         window->display();
     }
-
-    return;
-
 }

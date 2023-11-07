@@ -11,18 +11,18 @@
 #include <memory>
 #include "Player.h"
 #include "Obstacle.h"
+#include "Goal.h"
 
 class Level {
 public:
     Level(std::shared_ptr<sf::RenderWindow> window);
+    int play(std::shared_ptr<sf::RenderWindow> window);
 private:
     //Initialize needed variables
     sf::Clock gameClock;
     Player* player;
-    Obstacle* obstacle;
-    Obstacle* obstacle2;
-    Obstacle* obstacle3;
-    Obstacle* obstacle4;
+    std::vector<Object*> deathObjects;
+    Goal* goal;
     sf::View* camera;
 };
 

@@ -3,9 +3,7 @@
 // Edited by Jake 2023/11/06
 //
 
-#include <iostream>
 #include "Obstacle.h"
-#include <SFML/Graphics/Color.hpp>
 
 // Obstacles constructor
 Obstacle::Obstacle(sf::Vector2f size, sf::Vector2f pos) : position(pos), Object(size) {
