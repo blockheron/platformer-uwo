@@ -22,7 +22,6 @@ private:
     sf::RectangleShape* shape;
     const float speed = 0.002;
     const unsigned int lowerXBound = 0; //temporary
-    unsigned int upperXBound; //temporary
     unsigned int lowerYBound; //temporary
     const float gravity = -0.0000002;
     const float initialJumpVelocity = 0.008;

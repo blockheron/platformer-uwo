@@ -10,7 +10,6 @@ using namespace std;
 
 Player::Player(sf::Vector2<unsigned int> windowSize) {
     shape = new sf::RectangleShape(sf::Vector2f(50.f,50.f));
-    upperXBound = windowSize.x-shape->getSize().x;
     lowerYBound = windowSize.y-shape->getSize().y;
     shape->move(0, lowerYBound);
 }
@@ -23,7 +22,7 @@ void Player::Update(int timeElapsed) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shape->getPosition().x - speed * timeElapsed > lowerXBound) {
             shape->move(-speed * timeElapsed, 0);
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && shape->getPosition().x - speed * timeElapsed < upperXBound) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             shape->move(speed * timeElapsed, 0);
         }
         //
