@@ -7,14 +7,14 @@
 #define PLATFORMER_LEVEL_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include "Player.h"
 #include "obstacles.h"
 #include "collisions.h"
 
 class Level {
 public:
-    //Initialize needed functions
-    Level(sf::RenderWindow*);
+    Level(std::shared_ptr<sf::RenderWindow> window);
 private:
     //Initialize needed variables
     sf::Clock gameClock;

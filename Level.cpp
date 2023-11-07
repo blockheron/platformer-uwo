@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Level::Level(sf::RenderWindow* window) {
+Level::Level(shared_ptr<sf::RenderWindow> window) {
 
     gameClock; //start the game clock to time physics
     player = new Player(window->getSize()); //initialize player
@@ -59,6 +59,7 @@ Level::Level(sf::RenderWindow* window) {
         // end the current frame
         window->display();
     }
-    //
+
+    return;
 
 }
