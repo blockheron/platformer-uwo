@@ -12,6 +12,8 @@
 #include "Interface.h"
 
 using namespace std;
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 
 int main() {
 
@@ -19,10 +21,12 @@ int main() {
 
     shared_ptr<sf::RenderWindow> mainWindow(nullptr);
 
-    mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(800, 600), "Main Menu");
+    mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Main Menu");
+    sf::View* defaultCamera = new sf::View(sf::FloatRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT));
 
     while (mainWindow->isOpen())
     {
+        mainWindow->setView(*defaultCamera);
         int select = MainMenu(mainWindow);
         /*
          * We will have different selections available in main menu. For now just a play button.

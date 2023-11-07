@@ -23,6 +23,7 @@ private:
     obstacles* obstacle2;
     obstacles* obstacle3;
     obstacles* obstacle4;
+    sf::View* camera;
 };
 
 

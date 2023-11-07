@@ -15,7 +15,8 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
     obstacle2 = new obstacles(); //initialize obstacle
     obstacle3 = new obstacles(); //initialize obstacle
     obstacle4 = new obstacles(); //initialize obstacle
-    collisions* collision = new collisions( player, obstacle); // Create collision instance
+    collisions* collision = new collisions(player, obstacle); // Create collision instance
+    camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
     while (window->isOpen())
     {
@@ -48,6 +49,10 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
         obstacle3->show(250.f, 345.f);
         obstacle2->show(500.f, 545.f);
         obstacle4->show(500.f, 345.f);
+
+        //center the camera on the player
+        camera->setCenter(sf::Vector2<float>(player->getShape()->getPosition().x, camera->getCenter().y));
+        window->setView(*camera);
 
         //draw the objects in the game
         window->draw(*player->getShape());
