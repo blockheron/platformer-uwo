@@ -41,6 +41,8 @@ add_executable(group14 main.cpp Player.cpp Player.h Level.cpp Level.h Menu.h Men
 target_link_libraries(group14 sfml-graphics sfml-audio sfml-system sfml-window)
 ```
 
+To build this program properly in CLion, please ensure that the "Resources" directory is moved/copied into you "cmake-build-debug" directory to ensure that all textures are loaded in properly.
+
 ### Executing Program
 
 To run the program, open the specific build folder and ensure it's in the main directory.
