@@ -9,8 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "Player.h"
-#include "obstacles.h"
-#include "collisions.h"
+#include "Obstacle.h"
 
 class Level {
 public:
@@ -19,10 +18,10 @@ private:
     //Initialize needed variables
     sf::Clock gameClock;
     Player* player;
-    obstacles* obstacle;
-    obstacles* obstacle2;
-    obstacles* obstacle3;
-    obstacles* obstacle4;
+    Obstacle* obstacle;
+    Obstacle* obstacle2;
+    Obstacle* obstacle3;
+    Obstacle* obstacle4;
     sf::View* camera;
 };
 

@@ -6,20 +6,17 @@
 #ifndef PLATFORMER_PLAYER_H
 #define PLATFORMER_PLAYER_H
 
+#include "Object.h"
 #include <SFML/Graphics.hpp>
 
-class Player {
+class Player : public Object {
 public:
-    Player(sf::Vector2<unsigned int> windowSize);
+    Player(sf::Vector2<unsigned int> windowSize, sf::Vector2f size);
     void Update(int timeElapsed);
-    sf::Shape* getShape();
     void setToMove(bool val);
    // bool getToMove();
-    int getPositionX();
-    int getPositionY();
 
 private:
-    sf::RectangleShape* shape;
     const float speed = 0.002;
     const unsigned int lowerXBound = 0; //temporary
     unsigned int lowerYBound; //temporary

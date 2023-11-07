@@ -9,7 +9,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Level.h"
-#include "Interface.h"
+#include "Menu.h"
 
 using namespace std;
 #define WINDOW_WIDTH 800
@@ -21,7 +21,7 @@ int main() {
 
     shared_ptr<sf::RenderWindow> mainWindow(nullptr);
 
-    mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Main Menu");
+    mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Platformer");
     sf::View* defaultCamera = new sf::View(sf::FloatRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT));
 
     while (mainWindow->isOpen())

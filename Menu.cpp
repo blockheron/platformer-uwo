@@ -2,7 +2,7 @@
 // Created by Jake Choi on 2023-11-04.
 //
 
-#include "Interface.h"
+#include "Menu.h"
 
 using namespace std;
 
