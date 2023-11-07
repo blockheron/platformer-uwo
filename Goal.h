@@ -13,9 +13,17 @@
 
 class Goal : public Object {
 public:
+    /**
+     * @brief Goal constructor
+     * @param size
+     * @param pos
+     */
     Goal(sf::Vector2f size, sf::Vector2f pos);
 
 private:
+    /**
+     * @brief postion variable
+     */
     sf::Vector2f position;
 };
 
