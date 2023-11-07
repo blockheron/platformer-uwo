@@ -7,6 +7,7 @@
 #define PLATFORMER_LEVEL_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include "Player.h"
 #include "obstacles.h"
 #include "collisions.h"

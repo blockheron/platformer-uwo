@@ -8,6 +8,7 @@
 #define _INTERFACE_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 int MainMenu(std::shared_ptr<sf::RenderWindow> window);
 
