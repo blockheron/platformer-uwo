@@ -1,6 +1,9 @@
-//
-// Created by Jake Choi on 2023-11-07.
-//
+/**
+ * @file Goal.cpp
+ * @brief
+ * @author Jake
+ * @bug no known bugs
+ */
 
 #include "Goal.h"
 

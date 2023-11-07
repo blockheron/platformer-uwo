@@ -1,8 +1,9 @@
-//
-// Created by Liam on 2023-10-18.
-// Edited by Karen 2023/11/06
-// Edited by Jake 2023/11/06
-//
+/**
+ * @file Player.h
+ * @brief
+ * @author Liam, Karen, Jake
+ * @bug no known bugs
+ */
 
 #ifndef PLATFORMER_PLAYER_H
 #define PLATFORMER_PLAYER_H

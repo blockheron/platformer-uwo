@@ -1,6 +1,9 @@
-//
-// Created by Jake Choi on 2023-11-06.
-//
+/**
+ * @file Object.cpp
+ * @brief
+ * @author Jake
+ * @bug no known bugs
+ */
 
 #include <iostream>
 #include "Object.h"

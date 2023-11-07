@@ -1,7 +1,9 @@
-//
-// Created by Karen on 2023-11-05
-// Edited by Jake 2023/11/06
-//
+/**
+ * @file Obstacle.cpp
+ * @brief
+ * @author Karen
+ * @bug no known bugs
+ */
 
 #include "Obstacle.h"
 

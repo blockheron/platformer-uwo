@@ -1,6 +1,9 @@
-//
-// Created by Jake Choi on 2023-11-06.
-//
+/**
+ * @file Object.h
+ * @brief
+ * @author Jake
+ * @bug no known bugs
+ */
 
 /**
  * Note for future: May create two other object classes that inherit from object.

@@ -1,6 +1,9 @@
-//
-// Created by Jake Choi on 2023-11-07.
-//
+/**
+ * @file Goal.h
+ * @brief
+ * @author Jake
+ * @bug no known bugs
+ */
 
 #ifndef PLATFORMER_GOAL_H
 #define PLATFORMER_GOAL_H
