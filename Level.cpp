@@ -15,8 +15,8 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
 
     // Create obstacles that player must avoid.
     deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(500.f, 470.f)));
-    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(1000.f, 500.f)));
-    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(1500.f, 500.f)));
+    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 100.f), sf::Vector2f(1000.f, 500.f)));
+    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 100.f), sf::Vector2f(1500.f, 500.f)));
     deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(2000.f, 460.f)));
 
     goal = new Goal(sf::Vector2f(100.f, 600.f), sf::Vector2f(2800.f, 0.f));
