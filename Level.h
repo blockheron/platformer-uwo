@@ -11,6 +11,7 @@
 #include <memory>
 #include "Player.h"
 #include "Obstacle.h"
+#include "Terrain.h"
 #include "Goal.h"
 
 class Level {
@@ -22,6 +23,7 @@ private:
     sf::Clock gameClock;
     Player* player;
     std::vector<Object*> deathObjects;
+    std::vector<Object*> terrain;
     Goal* goal;
     sf::View* camera;
 };
