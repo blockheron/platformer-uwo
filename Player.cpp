@@ -81,6 +81,7 @@ void Player::collided(Object* terrain) {
     else {
         shape->move(0, ydif);
         vy = 0; //set the y velocity to 0 if there's a mostly vertical collision
+        if (ydif<0) jumped = false; //allow the player to jump if it's on top of a block
     }
 
 }
