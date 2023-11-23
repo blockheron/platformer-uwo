@@ -20,6 +20,9 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
     deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 100.f), sf::Vector2f(1500.f, 500.f)));
     deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(2000.f, 460.f)));
 
+    // Other obstacles
+    terrain.push_back(new Terrain(sf::Vector2f(60.f, 60.f), sf::Vector2f(2400.f, 470.f)));
+
     goal = new Goal(sf::Vector2f(100.f, 600.f), sf::Vector2f(2800.f, 0.f));
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
@@ -55,6 +58,15 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 return 0;
             }
         }
+        for (int i=0; i<terrain.size(); i++) {
+            /**
+             * Want to change to checking first if in current view, then check for collision.
+             * Will leave for later.
+             */
+            if (player->collides(terrain.at(i))) {
+                player->collided(terrain.at(i));
+            }
+        }
 
         if (player->collides(goal) || player->getPositionX() > 2800.f) {
             return 1;
@@ -70,6 +82,9 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         window->draw(*player->getShape());
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
+        }
+        for (int i=0; i<terrain.size(); i++) {
+            window->draw(*terrain.at(i)->getShape());
         }
         window->draw(*goal->getShape());
 

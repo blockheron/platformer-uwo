@@ -15,8 +15,7 @@ class Player : public Object {
 public:
     Player(sf::Vector2<unsigned int> windowSize, sf::Vector2f size);
     void Update(int timeElapsed);
-    void setToMove(bool val);
-   // bool getToMove();
+    void collided(Object* terrain); //assumed to be terrain for now
 
 private:
     const float speed = 0.002;
@@ -30,7 +29,9 @@ private:
     float vy = 0;
     float ay = 0;
     bool jumped = false;
-    bool toMove=true;
+    sf::Vector2<float> prevPosition;
+
+    void move(int timeElapsed);
 };
 
 

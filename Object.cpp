@@ -18,6 +18,10 @@ sf::Shape* Object::getShape() {
     return shape;
 }
 
+sf::Vector2f Object::getSize() {
+    return shape->getSize();
+}
+
 int Object::getPositionX() {
     return shape->getPosition().x;
 }

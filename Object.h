@@ -21,6 +21,7 @@ class Object {
 public:
     Object(sf::Vector2f size);
     sf::Shape* getShape();
+    sf::Vector2f getSize();
     int getPositionX();
     int getPositionY();
     bool collides(Object* otherObject);
