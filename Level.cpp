@@ -30,17 +30,18 @@ Level::Level(shared_ptr<sf::RenderWindow> window) {
 }
 
 int Level::play(shared_ptr<sf::RenderWindow> window) {
+    sf::Event event;
     while (window->isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
         while (window->pollEvent(event))
         {
             // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window->close();
+            }
+            // May add resizing event here
         }
-
         // set the background
         window->clear(sf::Color::Black);
 
