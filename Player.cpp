@@ -10,9 +10,11 @@
 
 using namespace std;
 
-Player::Player(sf::Vector2<unsigned int> windowSize, sf::Vector2f size) : Object(size) {
-    lowerYBound = windowSize.y-shape->getSize().y;
-    shape->move(0, lowerYBound);
+Player::Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size) : Object(size) {
+    lowerYBound = levelSize.y-shape->getSize().y;
+    upperXBound = levelSize.x-shape->getSize().x;
+
+    shape->move(start);
 }
 
 void Player::Update(int timeElapsed) {
@@ -30,7 +32,7 @@ void Player::move(int timeElapsed) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shape->getPosition().x - speed * timeElapsed > lowerXBound) {
         shape->move(-speed * timeElapsed, 0);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && shape->getPosition().x + speed * timeElapsed < upperXBound) {
         shape->move(speed * timeElapsed, 0);
     }
     //

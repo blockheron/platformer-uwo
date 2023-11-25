@@ -13,14 +13,15 @@
 
 class Player : public Object {
 public:
-    Player(sf::Vector2<unsigned int> windowSize, sf::Vector2f size);
+    Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size);
     void Update(int timeElapsed);
     void collided(Object* terrain); //assumed to be terrain for now
 
 private:
     const float speed = 0.002;
-    const unsigned int lowerXBound = 0; //temporary
-    unsigned int lowerYBound; //temporary
+    const unsigned int lowerXBound = 0;
+    unsigned int upperXBound;
+    unsigned int lowerYBound;
     const float gravity = -0.0000002;
     const float initialJumpVelocity = 0.008;
     const float midJumpAcceleration = 0.0000001;
