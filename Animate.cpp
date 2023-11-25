@@ -10,8 +10,8 @@
 
 using namespace std;
 
-Animate::Animate(sf::Vector2<unsigned int> windowSize, sf::Vector2f size) : Object(size) {
-    lowerYBound = windowSize.y-shape->getSize().y;
+Animate::Animate(sf::Vector2f levelSize, sf::Vector2f size) : Object(size) {
+    lowerYBound = levelSize.y-shape->getSize().y;
     shape->move(0, lowerYBound);
 }
 
