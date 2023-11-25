@@ -65,8 +65,6 @@ void Animate::move(int timeElapsed) {
 
 void Animate::collided(Object* terrain) {
 
-    cout << "collided" << endl;
-
     float xdif, ydif;
 
     if (prevPosition.x < shape->getPosition().x)
