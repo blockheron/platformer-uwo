@@ -1,37 +1,37 @@
 /**
  * @file Player.h
- * @brief
- * @author Liam, Karen, Jake
+ * @brief A class for moving, animate objects
+ * @author Liam, Karen, Jake, Emma
  * @bug no known bugs
  */
 
 #ifndef PLATFORMER_PLAYER_H
 #define PLATFORMER_PLAYER_H
 
-#include "Object.h"
+#include "Animate.h"
 #include <SFML/Graphics.hpp>
 
-class Player : public Object {
+class Player : public Animate {
 public:
-    Player(sf::Vector2<unsigned int> windowSize, sf::Vector2f size);
-    void Update(int timeElapsed);
-    void collided(Object* terrain); //assumed to be terrain for now
+    using Animate::Animate;
+//    void Update(int timeElapsed);
+//    void collided(Object* terrain); //assumed to be terrain for now
 
 private:
-    const float speed = 0.002;
-    const unsigned int lowerXBound = 0; //temporary
-    unsigned int lowerYBound; //temporary
-    const float gravity = -0.0000002;
-    const float initialJumpVelocity = 0.008;
-    const float midJumpAcceleration = 0.0000001;
-    const float terminalVelocity = -0.1;
-    const float simSpeed = 0.25;
-    float vy = 0;
-    float ay = 0;
-    bool jumped = false;
-    sf::Vector2<float> prevPosition;
+//    const float speed = 0.002;
+//    const unsigned int lowerXBound = 0; //temporary
+//    unsigned int lowerYBound; //temporary
+//    const float gravity = -0.0000002;
+//    const float initialJumpVelocity = 0.008;
+//    const float midJumpAcceleration = 0.0000001;
+//    const float terminalVelocity = -0.1;
+//    const float simSpeed = 0.25;
+//    float vy = 0;
+//    float ay = 0;
+//    bool jumped = false;
+//    sf::Vector2<float> prevPosition;
 
-    void move(int timeElapsed);
+    void move(int timeElapsed) override;   // made private as it's inherited from Animate
 };
 
 
