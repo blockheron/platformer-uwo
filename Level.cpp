@@ -9,23 +9,11 @@
 
 using namespace std;
 
-Level::Level(shared_ptr<sf::RenderWindow> window) {
+Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 
     gameClock; //start the game clock to time physics
 
-
-    // Create obstacles that player must avoid.
-    /*deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(500.f, 470.f)));
-    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 100.f), sf::Vector2f(1000.f, 500.f)));
-    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 100.f), sf::Vector2f(1500.f, 500.f)));
-    deathObjects.push_back(new Obstacle(sf::Vector2f(60.f, 60.f), sf::Vector2f(2000.f, 460.f)));
-
-    // Other obstacles
-    terrain.push_back(new Terrain(sf::Vector2f(60.f, 60.f), sf::Vector2f(2400.f, 470.f)));
-
-    goal = new Goal(sf::Vector2f(100.f, 600.f), sf::Vector2f(2800.f, 0.f));*/
-
-    load("testLevel");
+    load(levelName);
     player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
 
     floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));

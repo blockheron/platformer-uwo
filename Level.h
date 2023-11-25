@@ -18,7 +18,7 @@
 
 class Level {
 public:
-    Level(std::shared_ptr<sf::RenderWindow> window);
+    Level(std::shared_ptr<sf::RenderWindow> window, std::string levelName);
     int play(std::shared_ptr<sf::RenderWindow> window);
     bool load(std::string levelName);
 private:
