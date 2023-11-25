@@ -15,13 +15,6 @@ using namespace std;
 //    shape->move(0, lowerYBound);
 //}
 
-//void Animate::Update(int timeElapsed) {
-//
-//    prevPosition = shape->getPosition();
-//    move(timeElapsed);
-//
-//}
-
 void Player::move(int timeElapsed) {
 
     timeElapsed *= simSpeed;
