@@ -38,7 +38,7 @@ int main() {
             break;
         }
         else if (select == 2) {
-            Level* level = new Level(mainWindow);
+            Level* level = new Level(mainWindow, "testLevel");
             int gameEvent = level->play(mainWindow);
             if (gameEvent == 0) {
                 mainWindow->setView(*defaultCamera);
