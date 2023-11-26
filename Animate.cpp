@@ -12,6 +12,7 @@ using namespace std;
 
 Animate::Animate(sf::Vector2f levelSize, sf::Vector2f size) : Object(size) {
     lowerYBound = levelSize.y-shape->getSize().y;
+    upperXBound = levelSize.x-shape->getSize().x;
     shape->move(0, lowerYBound);
 }
 
