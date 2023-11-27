@@ -60,6 +60,19 @@ int MainMenu(shared_ptr<sf::RenderWindow> window) {
                     return 2;
                 }
             }
+            else if (evt.type == sf::Event::Resized) {
+                if (evt.size.width < DEFAULT_WINDOW_WIDTH || evt.size.height < DEFAULT_WINDOW_WIDTH) {
+                    window->setSize(sf::Vector2u(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
+                    window->setView(sf::View(sf::FloatRect(0, 0, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT)));
+                    title.setPosition(DEFAULT_WINDOW_WIDTH/2, DEFAULT_WINDOW_HEIGHT/3);
+                    playButton.setPosition(DEFAULT_WINDOW_WIDTH/2, (DEFAULT_WINDOW_HEIGHT/3)*2);
+                }
+                else {
+                    window->setView(sf::View(sf::FloatRect(0, 0, evt.size.width, evt.size.height)));
+                    title.setPosition(evt.size.width/2, evt.size.height/3);
+                    playButton.setPosition(evt.size.width/2, (evt.size.height/3)*2);
+                }
+            }
 
             window->clear(sf::Color::Black);
             window->draw(title);
@@ -132,6 +145,21 @@ int GameOver(shared_ptr<sf::RenderWindow> window) {
                 }
                 else if (exitButton.getGlobalBounds().contains(MPos)) {
                     return 1;
+                }
+            }
+            else if (evt.type == sf::Event::Resized) {
+                if (evt.size.width < DEFAULT_WINDOW_WIDTH || evt.size.height < DEFAULT_WINDOW_WIDTH) {
+                    window->setSize(sf::Vector2u(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
+                    window->setView(sf::View(sf::FloatRect(0, 0, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT)));
+                    title.setPosition(DEFAULT_WINDOW_WIDTH/2, DEFAULT_WINDOW_HEIGHT/4);
+                    playAgainButton.setPosition(DEFAULT_WINDOW_WIDTH/2, (DEFAULT_WINDOW_HEIGHT/8)*5);
+                    exitButton.setPosition(DEFAULT_WINDOW_WIDTH/2, (DEFAULT_WINDOW_HEIGHT/8)*7);
+                }
+                else {
+                    window->setView(sf::View(sf::FloatRect(0, 0, evt.size.width, evt.size.height)));
+                    title.setPosition(evt.size.width / 2, evt.size.height / 4);
+                    playAgainButton.setPosition(evt.size.width / 2, (evt.size.height / 8) * 5);
+                    exitButton.setPosition(evt.size.width / 2, (evt.size.height / 8) * 7);
                 }
             }
 
@@ -207,6 +235,21 @@ int LevelComplete(shared_ptr<sf::RenderWindow> window) {
                 }
                 else if (exitButton.getGlobalBounds().contains(MPos)) {
                     return 1;
+                }
+            }
+            else if (evt.type == sf::Event::Resized) {
+                if (evt.size.width < DEFAULT_WINDOW_WIDTH || evt.size.height < DEFAULT_WINDOW_WIDTH) {
+                    window->setSize(sf::Vector2u(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
+                    window->setView(sf::View(sf::FloatRect(0, 0, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT)));
+                    title.setPosition(DEFAULT_WINDOW_WIDTH/2, DEFAULT_WINDOW_HEIGHT/4);
+                    playAgainButton.setPosition(DEFAULT_WINDOW_WIDTH/2, (DEFAULT_WINDOW_HEIGHT/8)*5);
+                    exitButton.setPosition(DEFAULT_WINDOW_WIDTH/2, (DEFAULT_WINDOW_HEIGHT/8)*7);
+                }
+                else {
+                    window->setView(sf::View(sf::FloatRect(0, 0, evt.size.width, evt.size.height)));
+                    title.setPosition(evt.size.width/2, evt.size.height/4);
+                    playAgainButton.setPosition(evt.size.width/2, (evt.size.height/8)*5);
+                    exitButton.setPosition(evt.size.width/2, (evt.size.height/8)*7);
                 }
             }
 

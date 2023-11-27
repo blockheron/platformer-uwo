@@ -24,22 +24,29 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 }
 
 int Level::play(shared_ptr<sf::RenderWindow> window) {
+    sf::Event event;
     while (window->isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
         while (window->pollEvent(event))
         {
             // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window->close();
+            }
+            // May add resizing event here
+            else if (event.type == sf::Event::Resized) {
+                if (event.size.width < DEFAULT_WINDOW_WIDTH || event.size.height < DEFAULT_WINDOW_HEIGHT) {
+                    window->setSize(sf::Vector2u(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
+                    camera->setSize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+                }
+                else {
+                    camera->setSize(event.size.width, event.size.height);
+                }
+            }
         }
-
         // set the background
         window->clear(sf::Color::Black);
-
-        //get the time elapsed since last frame
-        int elapsed = gameClock.restart().asMicroseconds();
 
         bool deathCollision = false;
         for (int i=0; i<deathObjects.size(); i++) {
@@ -69,10 +76,14 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 return 1;
             }
         }
+
+        //get the time elapsed since last frame
+        int elapsed = gameClock.restart().asMicroseconds();
+        if (elapsed > 10000) elapsed = 0; // fixes teleportation for resizing window
         player->Update(elapsed);
 
         //center the camera on the player
-        camera->setCenter(sf::Vector2<float>(player->getShape()->getPosition().x, player->getShape()->getPosition().y));
+        camera->setCenter(sf::Vector2<float>(player->getPositionX(), player->getPositionY()));
         window->setView(*camera);
 
         //draw the objects in the game
