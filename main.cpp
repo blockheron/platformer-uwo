@@ -13,8 +13,8 @@
 #include "Menu.h"
 
 using namespace std;
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define DEFAULT_WINDOW_WIDTH 800
+#define DEFAULT_WINDOW_HEIGHT 600
 
 int main() {
 
@@ -22,14 +22,13 @@ int main() {
 
     shared_ptr<sf::RenderWindow> mainWindow(nullptr);
 
-    mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Platformer");
-    sf::View* defaultCamera = new sf::View(sf::FloatRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT));
+    mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), "Platformer");
 
     int select;
 
     while (mainWindow->isOpen())
     {
-        mainWindow->setView(*defaultCamera);
+        mainWindow->setView(sf::View(sf::FloatRect(0, 0, mainWindow->getSize().x, mainWindow->getSize().y)));
         select = MainMenu(mainWindow);
         /*
          * We will have different selections available in main menu. For now just a play button.
@@ -41,7 +40,7 @@ int main() {
             Level* level = new Level(mainWindow, "testLevel");
             int gameEvent = level->play(mainWindow);
             if (gameEvent == 0) {
-                mainWindow->setView(*defaultCamera);
+                mainWindow->setView(sf::View(sf::FloatRect(0, 0, mainWindow->getSize().x, mainWindow->getSize().y)));
                 select = GameOver(mainWindow);
                 if (select == 0) {
                     continue;
@@ -52,7 +51,7 @@ int main() {
                 }
             }
             else if (gameEvent == 1) {
-                mainWindow->setView(*defaultCamera);
+                mainWindow->setView(sf::View(sf::FloatRect(0, 0, mainWindow->getSize().x, mainWindow->getSize().y)));
                 select = LevelComplete(mainWindow);
                 if (select == 0) {
                     continue;
@@ -72,3 +71,4 @@ int main() {
     return 0;
 
 }
+

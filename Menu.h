@@ -8,6 +8,9 @@
 #ifndef PLATFORMER_MENU_H
 #define PLATFORMER_MENU_H
 
+#define DEFAULT_WINDOW_WIDTH 800
+#define DEFAULT_WINDOW_HEIGHT 600
+
 #include <SFML/Graphics.hpp>
 #include <memory>
 
