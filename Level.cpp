@@ -6,6 +6,7 @@
  */
 #include "Level.h"
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -13,17 +14,16 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 
     gameClock; //start the game clock to time physics
 
+    backgroundTexture.loadFromFile("Resources/Images/Background.png");
+
     load(levelName);
     player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
 
-    floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
-    floor.setPosition(sf::Vector2f(0, size.y));
-
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
-    backgroundTexture.loadFromFile("Resources/Images/Background.png");
-    background.setTexture(backgroundTexture);
-    background.setOrigin(background.getLocalBounds().width/2, background.getLocalBounds().height/2);
+    //background.setTexture(backgroundTexture);
+    //background.setPosition(sf::Vector2f(0,size.y+BACKGROUND_HEIGHT));
+
 
 }
 
@@ -50,7 +50,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             }
         }
         // set the background
-        window->clear(sf::Color::Black);
+        window->clear(sf::Color(45,33,21));
 
         bool deathCollision = false;
         for (int i=0; i<deathObjects.size(); i++) {
@@ -86,15 +86,17 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         if (elapsed > 10000) elapsed = 0; // fixes teleportation for resizing window
         player->Update(elapsed);
 
-        //center the camera and background on the player
-        background.setPosition(sf::Vector2f(player->getPositionX(), player->getPositionY()));
+        //center the camera on the player
         camera->setCenter(sf::Vector2<float>(player->getShape()->getPosition().x, player->getShape()->getPosition().y));
         //center the camera on the player
         camera->setCenter(sf::Vector2<float>(player->getPositionX(), player->getPositionY()));
         window->setView(*camera);
 
         //draw the objects in the game
-        window->draw(background);
+        for (int i=0; i<backgrounds.size(); ++i) {
+            window->draw(*backgrounds.at(i));
+            //cout<<backgrounds.at(i)->getPosition().x<<endl;
+        }
         window->draw(floor);
         window->draw(*player->getShape());
         for (int i=0; i<deathObjects.size(); i++) {
@@ -121,6 +123,12 @@ bool Level::load(std::string levelName) {
     if (!loadSuccess) return false; //return false if image isn't loaded correctly
 
     size = sf::Vector2f(map->getSize().x*GRIDSIZE, map->getSize().y*GRIDSIZE);//get the size for player boundaries
+
+    int backgroundNum = ceil(float(map->getSize().y*GRIDSIZE)/float(BACKGROUND_WIDTH));
+    for (int i = -1; i < backgroundNum+1; ++i) {
+        backgrounds.push_back(new sf::Sprite(backgroundTexture));
+        backgrounds.at(i+1)->setPosition(i*BACKGROUND_WIDTH,  size.y+BACKGROUND_HEIGHT);
+    }
 
     for (unsigned int i = 0; i < map->getSize().y; ++i) {
 
