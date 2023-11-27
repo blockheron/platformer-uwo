@@ -60,6 +60,11 @@ int MainMenu(shared_ptr<sf::RenderWindow> window) {
                     return 2;
                 }
             }
+            else if (evt.type == sf::Event::Resized) {
+                window->setView(sf::View(sf::FloatRect(0, 0, evt.size.width, evt.size.height)));
+                title.setPosition(evt.size.width/2, evt.size.height/3);
+                playButton.setPosition(evt.size.width/2, (evt.size.height/3)*2);
+            }
 
             window->clear(sf::Color::Black);
             window->draw(title);
@@ -133,6 +138,12 @@ int GameOver(shared_ptr<sf::RenderWindow> window) {
                 else if (exitButton.getGlobalBounds().contains(MPos)) {
                     return 1;
                 }
+            }
+            else if (evt.type == sf::Event::Resized) {
+                window->setView(sf::View(sf::FloatRect(0, 0, evt.size.width, evt.size.height)));
+                title.setPosition(evt.size.width/2, evt.size.height/3);
+                playAgainButton.setPosition(evt.size.width/2, (evt.size.height/8)*5);
+                exitButton.setPosition(evt.size.width/2, (evt.size.height/8)*7);
             }
 
             window->clear(sf::Color::Black);
@@ -208,6 +219,12 @@ int LevelComplete(shared_ptr<sf::RenderWindow> window) {
                 else if (exitButton.getGlobalBounds().contains(MPos)) {
                     return 1;
                 }
+            }
+            else if (evt.type == sf::Event::Resized) {
+                window->setView(sf::View(sf::FloatRect(0, 0, evt.size.width, evt.size.height)));
+                title.setPosition(evt.size.width/2, evt.size.height/3);
+                playAgainButton.setPosition(evt.size.width/2, (evt.size.height/8)*5);
+                exitButton.setPosition(evt.size.width/2, (evt.size.height/8)*7);
             }
 
             window->clear(sf::Color::Black);

@@ -35,6 +35,10 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 window->close();
             }
             // May add resizing event here
+            else if (event.type == sf::Event::Resized) {
+                window->setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
+                camera->setSize(event.size.width, event.size.height);
+            }
         }
         // set the background
         window->clear(sf::Color::Black);
