@@ -48,9 +48,6 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         // set the background
         window->clear(sf::Color::Black);
 
-        //get the time elapsed since last frame
-        int elapsed = gameClock.restart().asMicroseconds();
-
         bool deathCollision = false;
         for (int i=0; i<deathObjects.size(); i++) {
             /**
@@ -79,6 +76,10 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 return 1;
             }
         }
+
+        //get the time elapsed since last frame
+        int elapsed = gameClock.restart().asMicroseconds();
+        if (elapsed > 10000) elapsed = 0; // fixes teleportation for resizing window
         player->Update(elapsed);
 
         //center the camera on the player
