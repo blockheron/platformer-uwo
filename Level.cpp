@@ -34,16 +34,6 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             if (event.type == sf::Event::Closed) {
                 window->close();
             }
-            // May add resizing event here
-            else if (event.type == sf::Event::Resized) {
-                if (event.size.width < DEFAULT_WINDOW_WIDTH || event.size.height < DEFAULT_WINDOW_HEIGHT) {
-                    window->setSize(sf::Vector2u(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
-                    camera->setSize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
-                }
-                else {
-                    camera->setSize(event.size.width, event.size.height);
-                }
-            }
         }
         // set the background
         window->clear(sf::Color::Black);

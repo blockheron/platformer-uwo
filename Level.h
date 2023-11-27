@@ -8,8 +8,6 @@
 #define PLATFORMER_LEVEL_H
 
 #define GRIDSIZE 64
-#define DEFAULT_WINDOW_WIDTH 800
-#define DEFAULT_WINDOW_HEIGHT 600
 
 #include <SFML/Graphics.hpp>
 #include <memory>
