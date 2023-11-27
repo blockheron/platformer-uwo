@@ -13,8 +13,8 @@
 #include "Menu.h"
 
 using namespace std;
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define DEFAULT_WINDOW_WIDTH 800
+#define DEFAULT_WINDOW_HEIGHT 600
 
 int main() {
 
@@ -22,7 +22,7 @@ int main() {
 
     shared_ptr<sf::RenderWindow> mainWindow(nullptr);
 
-    mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Platformer");
+    mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), "Platformer");
 
     int select;
 

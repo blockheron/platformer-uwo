@@ -36,8 +36,13 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             }
             // May add resizing event here
             else if (event.type == sf::Event::Resized) {
-                window->setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
-                camera->setSize(event.size.width, event.size.height);
+                if (event.size.width < DEFAULT_WINDOW_WIDTH || event.size.height < DEFAULT_WINDOW_HEIGHT) {
+                    window->setSize(sf::Vector2u(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
+                    camera->setSize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+                }
+                else {
+                    camera->setSize(event.size.width, event.size.height);
+                }
             }
         }
         // set the background
@@ -77,7 +82,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         player->Update(elapsed);
 
         //center the camera on the player
-        camera->setCenter(sf::Vector2<float>(player->getShape()->getPosition().x, player->getShape()->getPosition().y));
+        camera->setCenter(sf::Vector2<float>(player->getPositionX(), player->getPositionY()));
         window->setView(*camera);
 
         //draw the objects in the game
