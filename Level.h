@@ -29,6 +29,8 @@ private:
     std::vector<Object*> terrain;
     std::vector<Goal*> goals;
     sf::RectangleShape floor;
+    sf::Texture backgroundTexture;
+    sf::Sprite background;
     sf::Vector2f start;
     sf::Vector2f size;
     //Goal* goal;

@@ -21,6 +21,10 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
+    backgroundTexture.loadFromFile("Resources/Images/Background.png");
+    background.setTexture(backgroundTexture);
+    background.setOrigin(background.getLocalBounds().width/2, background.getLocalBounds().height/2);
+
 }
 
 int Level::play(shared_ptr<sf::RenderWindow> window) {
@@ -71,13 +75,15 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         }
         player->Update(elapsed);
 
-        //center the camera on the player
+        //center the camera and background on the player
+        background.setPosition(sf::Vector2f(player->getPositionX(), player->getPositionY()));
         camera->setCenter(sf::Vector2<float>(player->getShape()->getPosition().x, player->getShape()->getPosition().y));
         window->setView(*camera);
 
         //draw the objects in the game
-        window->draw(*player->getShape());
+        window->draw(background);
         window->draw(floor);
+        window->draw(*player->getShape());
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
         }
