@@ -35,7 +35,7 @@ int main() {
             break;
         }
         else if (select == 2) {
-            Level* level = new Level(mainWindow, "testLevelEnemy");
+            Level* level = new Level(mainWindow, "level1debug");
             int gameEvent = level->play(mainWindow);
             if (gameEvent == 0) {
                 mainWindow->setView(sf::View(sf::FloatRect(0, 0, mainWindow->getSize().x, mainWindow->getSize().y)));
