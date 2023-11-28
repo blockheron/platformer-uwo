@@ -141,6 +141,11 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
     return -1;
 }
 
+/**
+ * @brief loads levels from png images in resources
+ * @param levelName the name of the level to load
+ * @return true if the level is loaded, false if loading fails
+ */
 bool Level::load(std::string levelName) {
 
     //load the map from an image into an array of pixels
