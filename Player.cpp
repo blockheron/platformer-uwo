@@ -18,7 +18,10 @@ using namespace std;
 Player::Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size) : Animate(levelSize, size) {
 
     shape->move(start);
-    shape->setFillColor(sf::Color::Blue);
+    textureRight.loadFromFile("Resources/Images/Main-Character-Right.png");
+    textureLeft.loadFromFile("Resources/Images/Main-Character-Left.png");
+    shape->setTexture(&textureRight);
+    //shape->setFillColor(sf::Color::Blue);
 
 }
 
@@ -33,9 +36,11 @@ void Player::move(int timeElapsed) {
     //left and right motion
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shape->getPosition().x - speed * timeElapsed > lowerXBound) {
         shape->move(-speed * timeElapsed, 0);
+        shape->setTexture(&textureLeft);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && shape->getPosition().x + speed * timeElapsed < upperXBound) {
         shape->move(speed * timeElapsed, 0);
+        shape->setTexture(&textureRight);
     }
     //
 
