@@ -31,7 +31,8 @@ private:
 //    float ay = 0;
 //    bool jumped = false;
 //    sf::Vector2<float> prevPosition;
-    sf::Texture texture;
+    sf::Texture textureRight;
+    sf::Texture textureLeft;
 
     void move(int timeElapsed) override;   // made private as it's inherited from Animate
 };
