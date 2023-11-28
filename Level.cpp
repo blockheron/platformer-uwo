@@ -20,7 +20,7 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
     //player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
 
     for (int i=0; i<enemyStartPositions.size(); i++) {  // initialise enemies
-        enemies.push_back(enemy = new Enemy(enemyStartPositions.at(i), enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE)));
+        enemies.push_back(enemy = new Enemy(enemyStartPositions.at(i), enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE/2)));
     }
 
     floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
@@ -84,7 +84,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             if (player->collides(enemies.at(i))) {
 
                 // player kills enemy by colliding with enemy from top
-                if (player->getPrevPosition().y < enemies.at(i)->getPositionY()) {
+                if (player->getPrevPosition().y+player->getSize().y < enemies.at(i)->getPositionY()) {
                     enemies.at(i)->getShape()->setFillColor(sf::Color::Transparent);
                     enemies.erase(enemies.begin()+i);   // actually deletes enemy object
                 }
@@ -175,7 +175,7 @@ bool Level::load(std::string levelName) {
                 start = sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE);
             }
             else if (c==sf::Color::Magenta) {//get enemy starting position and spawn enemies
-                enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
+                enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE+GRIDSIZE/2));
             }
             else if (c==sf::Color::Cyan) {//get enemy ending position
                 enemyEndPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
