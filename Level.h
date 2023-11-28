@@ -19,6 +19,8 @@
 #include "Obstacle.h"
 #include "Terrain.h"
 #include "Goal.h"
+#include "Coin.h"
+#include "Score.h"
 #include "Enemy.h"
 
 class Level {
@@ -31,6 +33,7 @@ private:
     sf::Clock gameClock;
     Player* player;
     std::vector<Object*> deathObjects;
+    std::vector<Object*> rewardObjects;
     std::vector<Object*> terrain;
     std::vector<Goal*> goals;
     sf::RectangleShape floor;

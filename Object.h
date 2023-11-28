@@ -25,6 +25,7 @@ public:
     int getPositionX();
     int getPositionY();
     bool collides(Object* otherObject);
+    void collect();
 
 protected:
     sf::RectangleShape* shape;

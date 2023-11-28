@@ -57,6 +57,15 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 return 0;
             }
         }
+        for (int i=0; i<rewardObjects.size(); i++) {
+            /**
+             * Want to change to checking first if in current view, then check for collision.
+             * Will leave for later.
+             */
+            if (player->collides(rewardObjects.at(i))) {
+                rewardObjects.at(i)->collect();
+            }
+        }
         for (int i=0; i<terrain.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
@@ -123,6 +132,9 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
         }
+        for (int i=0; i<rewardObjects.size(); i++) {
+            window->draw(*rewardObjects.at(i)->getShape());
+        }
         for (int i=0; i<terrain.size(); i++) {
             window->draw(*terrain.at(i)->getShape());
         }
@@ -173,6 +185,9 @@ bool Level::load(std::string levelName) {
             }
             else if (c==sf::Color::Blue) {//get player starting position
                 start = sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE);
+            }
+            else if (c==sf::Color::Yellow) {//get enemy starting position and spawn enemies
+                rewardObjects.push_back(new Coin(sf::Vector2f(GRIDSIZE, GRIDSIZE), sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE)));
             }
             else if (c==sf::Color::Magenta) {//get enemy starting position and spawn enemies
                 enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE+GRIDSIZE/2));

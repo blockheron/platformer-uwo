@@ -34,4 +34,8 @@ bool Object::collides(Object* otherObject) {
     return shape->getGlobalBounds().intersects(otherObject->getShape()->getGlobalBounds());
 }
 
+void Object::collect() {
+     shape->setSize(sf::Vector2f(0,0));
+}
+
 
