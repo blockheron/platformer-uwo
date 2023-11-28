@@ -5,18 +5,30 @@
  * @bug no known bugs
  */
 
-#include <iostream>
 #include "Player.h"
 
 using namespace std;
 
+/**
+ * @brief the constructor for a Player object
+ * @param start starting position for a player on a level
+ * @param levelSize 2d size of the level
+ * @param size size of the player
+ */
 Player::Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size) : Animate(levelSize, size) {
 
     shape->move(start);
-    shape->setFillColor(sf::Color::Blue);
+    textureRight.loadFromFile("Resources/Images/Main-Character-Right.png");
+    textureLeft.loadFromFile("Resources/Images/Main-Character-Left.png");
+    shape->setTexture(&textureRight);
+    //shape->setFillColor(sf::Color::Blue);
 
 }
 
+/**
+ * @brief control player left/right and jump movement with WASD keys
+ * @param timeElapsed time since the last frame
+ */
 void Player::move(int timeElapsed) {
 
     timeElapsed *= simSpeed;
@@ -24,9 +36,11 @@ void Player::move(int timeElapsed) {
     //left and right motion
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shape->getPosition().x - speed * timeElapsed > lowerXBound) {
         shape->move(-speed * timeElapsed, 0);
+        shape->setTexture(&textureLeft);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && shape->getPosition().x + speed * timeElapsed < upperXBound) {
         shape->move(speed * timeElapsed, 0);
+        shape->setTexture(&textureRight);
     }
     //
 

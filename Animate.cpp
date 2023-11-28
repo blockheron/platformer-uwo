@@ -1,6 +1,6 @@
 /**
  * @file Animate.cpp
- * @brief
+ * @brief a subclass of Object, which acts as a superclass for all animated objects (Player and Enemy)
  * @author Emma, Jake
  * @bug no known bugs
  */
@@ -10,12 +10,20 @@
 
 using namespace std;
 
+/**
+ * @brief constructor for an Animate object
+ * @param levelSize 2D size of the level
+ * @param size 2D size of the object
+ */
 Animate::Animate(sf::Vector2f levelSize, sf::Vector2f size) : Object(size) {
     lowerYBound = levelSize.y-shape->getSize().y;
     upperXBound = levelSize.x-shape->getSize().x;
-//    shape->move(0, lowerYBound);
 }
 
+/**
+ * @brief updates the position of the object
+ * @param timeElapsed time that has passed in the level
+ */
 void Animate::Update(int timeElapsed) {
 
     prevPosition = shape->getPosition();
@@ -23,47 +31,18 @@ void Animate::Update(int timeElapsed) {
 
 }
 
+/**
+ * @brief controls object movement; is left empty to indicate all Animate objects need this method
+ * @param timeElapsed time since the last frame
+ */
 void Animate::move(int timeElapsed) {
-
-    timeElapsed *= simSpeed;
-
-    //left and right motion
-//    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shape->getPosition().x - speed * timeElapsed > lowerXBound) {
-//        shape->move(-speed * timeElapsed, 0);
-//    }
-//    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-//        shape->move(speed * timeElapsed, 0);
-//    }
-    //
-
-    //initial jump
-//    if (!jumped &&
-//        ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space)))) {
-//        vy = initialJumpVelocity;
-//        jumped = true;
-//    }
-
-        //midair control (jump higher/delay landing)
-//    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-//        ay = midJumpAcceleration + gravity;
-//    } else ay = gravity;
-
-    //change velocity based on acceleration up to some terminal velocity
-//    if (vy + ay * timeElapsed >= terminalVelocity) vy += ay * timeElapsed;
-//    else vy = terminalVelocity;
-    //
-
-    //change position until you hit the floor
-//    if (shape->getPosition().y - vy < lowerYBound) {
-//        shape->move(0, -vy * timeElapsed);
-//    } else {
-//        jumped = false; //reset jump
-//        shape->setPosition(shape->getPosition().x, lowerYBound);
-//    }
-    //
 
 }
 
+/**
+ * @brief lets the object stand on floors, hit walls/ceilings, and jump from the top of a block
+ * @param terrain the Terrain object being collided against
+ */
 void Animate::collided(Object* terrain) {
 
     float xdif, ydif;
@@ -92,6 +71,10 @@ void Animate::collided(Object* terrain) {
     }
 }
 
+/**
+ * @brief get method for the object's prevPosition
+ * @return returns the object's previous position
+ */
 sf::Vector2<float> Animate::getPrevPosition() {
     return prevPosition;
 }
