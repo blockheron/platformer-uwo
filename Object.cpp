@@ -1,7 +1,7 @@
 /**
  * @file Object.cpp
  * @brief
- * @author Jake
+ * @author Jake, Karen
  * @bug no known bugs
  */
 
@@ -38,4 +38,6 @@ void Object::collect() {
      shape->setSize(sf::Vector2f(0,0));
 }
 
-
+void Object::show() {
+    shape->setSize(sf::Vector2f(50,50));
+}

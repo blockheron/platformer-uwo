@@ -1,7 +1,7 @@
 /**
  * @file Object.h
  * @brief
- * @author Jake
+ * @author Jake, Karen
  * @bug no known bugs
  */
 
@@ -26,6 +26,7 @@ public:
     int getPositionY();
     bool collides(Object* otherObject);
     void collect();
+    void show();
 
 protected:
     sf::RectangleShape* shape;

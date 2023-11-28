@@ -9,7 +9,7 @@
 
 // Score constructor
 Score::Score(sf::Vector2f size, sf::Vector2f pos) : position(pos), Object(size) {
-    shape->setPosition(800, 600);
+    shape->setPosition(position.x, position.y);
     shape->setFillColor(sf::Color::Yellow);
     /*score.setString("0");
     score.setCharacterSize(500);
