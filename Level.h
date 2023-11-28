@@ -1,7 +1,7 @@
 /**
  * @file Level.h
  * @brief
- * @author Liam, Karen, Jake
+ * @author Liam, Karen, Jake, Emma
  * @bug no known bugs
  */
 #ifndef PLATFORMER_LEVEL_H
@@ -15,6 +15,7 @@
 #include "Obstacle.h"
 #include "Terrain.h"
 #include "Goal.h"
+#include "Enemy.h"
 
 class Level {
 public:
@@ -33,6 +34,11 @@ private:
     sf::Vector2f size;
     //Goal* goal;
     sf::View* camera;
+    Enemy* enemy;
+    std::vector<Enemy*> enemies;
+    std::vector<sf::Vector2f> enemyStartPositions;  // setting points where enemy walks
+    std::vector<sf::Vector2f> enemyEndPositions;
+
 };
 
 

@@ -13,7 +13,7 @@ using namespace std;
 Animate::Animate(sf::Vector2f levelSize, sf::Vector2f size) : Object(size) {
     lowerYBound = levelSize.y-shape->getSize().y;
     upperXBound = levelSize.x-shape->getSize().x;
-    shape->move(0, lowerYBound);
+//    shape->move(0, lowerYBound);
 }
 
 void Animate::Update(int timeElapsed) {
@@ -85,4 +85,8 @@ void Animate::collided(Object* terrain) {
         if (ydif<0) jumped = false; //allow the player to jump if it's on top of a block
     }
 
+}
+
+sf::Vector2<float> Animate::getPrevPosition() {
+    return prevPosition;
 }
