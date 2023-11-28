@@ -9,8 +9,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "Level.h"
 #include "Menu.h"
+#include "User.h"
 
 using namespace std;
 
