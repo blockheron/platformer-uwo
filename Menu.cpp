@@ -16,7 +16,7 @@ int MainMenu(shared_ptr<sf::RenderWindow> window) {
     // set up title of game texture
     sf::Texture titleTexture;
     sf::Sprite title;
-    titleTexture.loadFromFile("Resources/Images/title.png");
+    titleTexture.loadFromFile("Resources/Images/mainTitle.png");
     title.setTexture(titleTexture);
     title.setOrigin(title.getLocalBounds().width/2, title.getLocalBounds().height/2);
     title.setPosition(window->getSize().x/2, window->getSize().y/3);

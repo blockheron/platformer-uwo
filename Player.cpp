@@ -1,7 +1,7 @@
 /**
  * @file Player.cpp
  * @brief
- * @author Liam, Karen, Jake
+ * @author Liam, Karen, Jake, Emma
  * @bug no known bugs
  */
 
@@ -13,6 +13,7 @@ using namespace std;
 Player::Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size) : Animate(levelSize, size) {
 
     shape->move(start);
+    shape->setFillColor(sf::Color::Blue);
 
 }
 
