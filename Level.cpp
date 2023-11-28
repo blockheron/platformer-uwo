@@ -43,9 +43,6 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         // set the background
         window->clear(sf::Color::Black);
 
-        //get the time elapsed since last frame
-        int elapsed = gameClock.restart().asMicroseconds();
-
         bool deathCollision = false;
         for (int i=0; i<deathObjects.size(); i++) {
             /**
@@ -160,9 +157,6 @@ bool Level::load(std::string levelName) {
             }
             else if (c==sf::Color::Blue) {//get player starting position
                 start = sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE);
-            }
-            else if (c==sf::Color::Yellow) { // get coin
-                rewardObjects.push_back(new Coin(sf::Vector2f(GRIDSIZE, GRIDSIZE), sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE)));
             }
             else if (c==sf::Color::Magenta) {//get enemy starting position and spawn enemies
                 enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
