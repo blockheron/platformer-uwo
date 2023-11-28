@@ -13,8 +13,6 @@
 #include <memory>
 #include "Player.h"
 #include "Obstacle.h"
-#include "Coin.h"
-#include "Score.h"
 #include "Terrain.h"
 #include "Goal.h"
 #include "Enemy.h"
@@ -24,23 +22,17 @@ public:
     Level(std::shared_ptr<sf::RenderWindow> window, std::string levelName);
     int play(std::shared_ptr<sf::RenderWindow> window);
     bool load(std::string levelName);
-
 private:
-    // Initialize needed variables
+    //Initialize needed variables
     sf::Clock gameClock;
     Player* player;
     std::vector<Object*> deathObjects;
-    std::vector<Object*> scoreObjects;
-    std::vector<Object*> rewardObjects;
     std::vector<Object*> terrain;
-  //  Score* scoring ;
-    // sf::Font font;
     std::vector<Goal*> goals;
     sf::RectangleShape floor;
     sf::Vector2f start;
     sf::Vector2f size;
-    // sf::Text score;
-    // Goal* goal;
+    //Goal* goal;
     sf::View* camera;
     Enemy* enemy;
     std::vector<Enemy*> enemies;

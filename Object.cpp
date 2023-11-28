@@ -1,7 +1,7 @@
 /**
  * @file Object.cpp
  * @brief
- * @author Jake, Karen
+ * @author Jake
  * @bug no known bugs
  */
 
@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Object::Object(sf::Vector2f  size) {
+Object::Object(sf::Vector2f size) {
     shape = new sf::RectangleShape(size);
 }
 
@@ -35,7 +35,3 @@ bool Object::collides(Object* otherObject) {
 }
 
 
-void Object::collect() {
-   // shape->setFillColor(sf::Color::Black);
-    shape->setSize(sf::Vector2f(0, 0));
-}

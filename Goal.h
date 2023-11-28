@@ -22,7 +22,7 @@ public:
 
 private:
     /**
-     * @brief position variable
+     * @brief postion variable
      */
     sf::Vector2f position;
 };

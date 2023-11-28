@@ -85,8 +85,7 @@ void Animate::collided(Object* terrain) {
         if (ydif<0) jumped = false; //allow the player to jump if it's on top of a block
     }
 
-}
-
 sf::Vector2<float> Animate::getPrevPosition() {
     return prevPosition;
+
 }
