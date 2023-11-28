@@ -1,6 +1,6 @@
 /**
  * @file Enemy.h
- * @brief A class for enemies that harm the player
+ * @brief The header file for Enemy.cpp
  * @author Emma
  * @bug no known bugs
  */
@@ -11,6 +11,9 @@
 #include "Animate.h"
 #include <SFML/Graphics.hpp>
 
+/**
+ * @brief an Enemy object's methods and instances. It also inherits from Animate and Object
+ */
 class Enemy : public Animate {
 public:
     using Animate::Animate;
