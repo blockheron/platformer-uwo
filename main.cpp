@@ -59,9 +59,8 @@ int main() {
                     break;
                 }
             }
-            else if (gameEvent == 2) {
-                // player paused game...will be implemented later
-                ;
+            else if (gameEvent == -1) {
+                break; //game was closed
             }
         }
     }

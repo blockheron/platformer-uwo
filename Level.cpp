@@ -34,6 +34,18 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             if (event.type == sf::Event::Closed) {
                 window->close();
             }
+            // pause menu
+            else if (event.type == sf::Event::KeyPressed) {
+                 if (event.key.scancode == sf::Keyboard::Scan::Escape) {
+                     window->setView(sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y)));
+                     int pauseSelect = PauseMenu(window);
+                     //subject to change...
+                     if (pauseSelect == 1) {
+                         window->close();
+                         return -1;
+                     }
+                 }
+            }
         }
         // set the background
         window->clear(sf::Color::Black);

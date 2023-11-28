@@ -15,6 +15,7 @@
 #include "Obstacle.h"
 #include "Terrain.h"
 #include "Goal.h"
+#include "Menu.h"
 
 class Level {
 public:
@@ -33,6 +34,7 @@ private:
     sf::Vector2f size;
     //Goal* goal;
     sf::View* camera;
+
 };
 
 

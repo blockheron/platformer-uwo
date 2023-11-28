@@ -14,5 +14,6 @@
 int MainMenu(std::shared_ptr<sf::RenderWindow> window);
 int GameOver(std::shared_ptr<sf::RenderWindow> window);
 int LevelComplete(std::shared_ptr<sf::RenderWindow> window);
+int PauseMenu(std::shared_ptr<sf::RenderWindow> window);
 
 #endif //PLATFORMER_MENU_H
