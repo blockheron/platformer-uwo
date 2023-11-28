@@ -25,6 +25,13 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 
     floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
     floor.setPosition(sf::Vector2f(0, size.y));
+
+    // Score
+   // scoreObjects.push_back(new Score(sf::Vector2f(500, 400), sf::Vector2f(GRIDSIZE, GRIDSIZE)));
+   // for (int i=0; i<scoreObjects.size(); i++) {
+    //    window->draw(*scoreObjects.at(i)->getShape());
+    //}
+
     player = new Player(start, size, sf::Vector2f(GRIDSIZE, 2*GRIDSIZE)); //initialize player
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
@@ -57,6 +64,29 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 return 0;
             }
         }
+        for (int i=0; i<rewardObjects.size(); i++) {
+            /**
+             * Want to change to checking first if in current view, then check for collision.
+             * Will leave for later.
+             */
+            if (player->collides(rewardObjects.at(i))) {
+                rewardObjects.at(i)->collect(); // Hide coin
+                coinsCollect=true;
+                scoreObjects.at(i)->show();
+            }
+        }
+        for (int i=0; i<scoreObjects.size(); i++) {// Hide score
+            /**
+             * Want to change to checking first if in current view, then check for collision.
+             * Will leave for later.
+             */
+            if (coinsCollect==false){
+                scoreObjects.at(i)->collect();
+            }
+
+        }
+
+
         for (int i=0; i<terrain.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
@@ -123,6 +153,12 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
         }
+        for (int i=0; i<rewardObjects.size(); i++) {
+            window->draw(*rewardObjects.at(i)->getShape());
+        }
+        for (int i=0; i<scoreObjects.size(); i++) {
+            window->draw(*scoreObjects.at(i)->getShape());
+        }
         for (int i=0; i<terrain.size(); i++) {
             window->draw(*terrain.at(i)->getShape());
         }
@@ -173,6 +209,12 @@ bool Level::load(std::string levelName) {
             }
             else if (c==sf::Color::Blue) {//get player starting position
                 start = sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE);
+            }
+            else if (c==sf::Color::Yellow) { //Create coins
+                rewardObjects.push_back(new Coin(sf::Vector2f(GRIDSIZE, GRIDSIZE), sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE)));
+            }
+            else if (c==sf::Color(128,0,128)){//Create scores
+                scoreObjects.push_back(new Coin(sf::Vector2f(GRIDSIZE, GRIDSIZE), sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE)));
             }
             else if (c==sf::Color::Magenta) {//get enemy starting position and spawn enemies
                 enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE+GRIDSIZE/2));
