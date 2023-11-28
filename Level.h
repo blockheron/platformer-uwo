@@ -19,6 +19,8 @@
 #include "Obstacle.h"
 #include "Terrain.h"
 #include "Goal.h"
+#include "Coin.h"
+#include "Score.h"
 #include "Enemy.h"
 
 class Level {
@@ -28,9 +30,12 @@ public:
     bool load(std::string levelName);
 private:
     //Initialize needed variables
+    bool coinsCollect = false;
     sf::Clock gameClock;
     Player* player;
     std::vector<Object*> deathObjects;
+    std::vector<Object*> rewardObjects;
+    std::vector<Object*> scoreObjects;
     std::vector<Object*> terrain;
     std::vector<Goal*> goals;
     sf::RectangleShape floor;
