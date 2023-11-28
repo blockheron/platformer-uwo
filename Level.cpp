@@ -131,7 +131,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         }
      //   window->draw(scoring->getScore());
         for (int i=0; i<enemyStartPositions.size(); i++) {
-            window->draw(*enemy->getShape());
+            window->draw(*enemies.at(i)->getShape());
         }
 
         // end the current frame
