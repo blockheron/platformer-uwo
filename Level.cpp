@@ -1,7 +1,7 @@
 /**
  * @file Level.cpp
  * @brief
- * @author  Liam, Karen, Jake
+ * @author  Liam, Karen, Jake, Emma
  * @bug no known bugs
  */
 #include "Level.h"
@@ -17,13 +17,17 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
     backgroundTexture.loadFromFile("Resources/Images/Background.png");
 
     load(levelName);
+    //player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
+
+    for (int i=0; i<enemyStartPositions.size(); i++) {  // initialise enemies
+        enemies.push_back(enemy = new Enemy(enemyStartPositions.at(i), enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE)));
+    }
+
+    floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
+    floor.setPosition(sf::Vector2f(0, size.y));
     player = new Player(start, size, sf::Vector2f(GRIDSIZE, 2*GRIDSIZE)); //initialize player
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
-
-    //background.setTexture(backgroundTexture);
-    //background.setPosition(sf::Vector2f(0,size.y+BACKGROUND_HEIGHT));
-
 
 }
 
@@ -32,21 +36,12 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
     while (window->isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
         while (window->pollEvent(event))
         {
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed) {
                 window->close();
-            }
-            // May add resizing event here
-            else if (event.type == sf::Event::Resized) {
-                if (event.size.width < DEFAULT_WINDOW_WIDTH || event.size.height < DEFAULT_WINDOW_HEIGHT) {
-                    window->setSize(sf::Vector2u(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
-                    camera->setSize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
-                }
-                else {
-                    camera->setSize(event.size.width, event.size.height);
-                }
             }
         }
         // set the background
@@ -81,13 +76,39 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             }
         }
 
+        for (int i=0; i<enemies.size(); i++) {
+            /**
+             * Want to change to checking first if in current view, then check for collision.
+             * Will leave for later.
+             */
+            if (player->collides(enemies.at(i))) {
+
+                // player kills enemy by colliding with enemy from top
+                if (player->getPrevPosition().y < enemies.at(i)->getPositionY()) {
+                    enemies.at(i)->getShape()->setFillColor(sf::Color::Transparent);
+                    enemies.erase(enemies.begin()+i);   // actually deletes enemy object
+                }
+                else {
+                    return 0;       // any other kind of collision causes death
+                }
+
+            }
+        }
+
         //get the time elapsed since last frame
         int elapsed = gameClock.restart().asMicroseconds();
         if (elapsed > 10000) elapsed = 0; // fixes teleportation for resizing window
         player->Update(elapsed);
 
-        //center the camera on the player
-        camera->setCenter(sf::Vector2<float>(player->getShape()->getPosition().x, player->getShape()->getPosition().y));
+        for (int i=0; i<enemies.size(); i++) {
+            /**
+             * Want to change to checking first if in current view, then check for collision.
+             * Will leave for later.
+             */
+            enemies.at(i)->Update(elapsed);
+
+        }
+
         //center the camera on the player
         camera->setCenter(sf::Vector2<float>(player->getPositionX(), player->getPositionY()));
         window->setView(*camera);
@@ -97,7 +118,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             window->draw(*backgrounds.at(i));
             //cout<<backgrounds.at(i)->getPosition().x<<endl;
         }
-        window->draw(floor);
+        //window->draw(floor);
         window->draw(*player->getShape());
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
@@ -107,6 +128,10 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         }
         for (int i=0; i<goals.size(); i++) {
             window->draw(*goals.at(i)->getShape());
+        }
+     //   window->draw(scoring->getScore());
+        for (int i=0; i<enemyStartPositions.size(); i++) {
+            window->draw(*enemy->getShape());
         }
 
         // end the current frame
@@ -148,6 +173,13 @@ bool Level::load(std::string levelName) {
             }
             else if (c==sf::Color::Blue) {//get player starting position
                 start = sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE);
+            }
+            else if (c==sf::Color::Magenta) {//get enemy starting position and spawn enemies
+                enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
+            }
+            else if (c==sf::Color::Cyan) {//get enemy ending position
+                enemyEndPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
+
             }
 
         }

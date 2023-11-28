@@ -1,7 +1,7 @@
 /**
  * @file Player.cpp
  * @brief
- * @author Liam, Karen, Jake
+ * @author Liam, Karen, Jake, Emma
  * @bug no known bugs
  */
 
