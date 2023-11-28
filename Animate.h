@@ -17,6 +17,7 @@ public:
     void Update(int timeElapsed);
     void collided(Object* terrain); //assumed to be terrain for now
     virtual void move(int timeElapsed); // made virtual and public so children can access this
+    virtual sf::Vector2<float> getPrevPosition();
 
 //private:
 //    const float speed = 0.002;
