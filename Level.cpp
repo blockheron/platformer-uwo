@@ -21,11 +21,8 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
     }
 
     floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
-    floor.setPosition(sf::Vector2f(0, size.y));
-
-    //Set scoring
     scoreObjects.push_back(new Score(sf::Vector2f(GRIDSIZE, GRIDSIZE),sf::Vector2f(GRIDSIZE, GRIDSIZE)));
-    //window->draw(*scoreObjects->getShape());
+    floor.setPosition(sf::Vector2f(0, size.y));
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
