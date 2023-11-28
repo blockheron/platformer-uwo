@@ -1,15 +1,21 @@
 /**
- * @file Player.h
- * @brief A class for enemies that harm the player
+ * @file Enemy.cpp
+ * @brief A subclass of Animate for enemies that harm the player but can be killed
  * @author Emma
  * @bug no known bugs
  */
 
-#include <iostream>
 #include "Enemy.h"
 
 using namespace std;
 
+/**
+ * @brief the constructor for an Enemy object
+ * @param enemyStart starting position of an enemy's walk cycle
+ * @param enemyEnd ending position of an enemy's walk cycle
+ * @param levelSize 2d size of the level
+ * @param size size of the enemy
+ */
 Enemy::Enemy(sf::Vector2f enemyStart, sf::Vector2f enemyEnd, sf::Vector2f levelSize, sf::Vector2f size) : Animate(levelSize, size){
 
     this->enemyStartPosition = enemyStart;
@@ -18,6 +24,10 @@ Enemy::Enemy(sf::Vector2f enemyStart, sf::Vector2f enemyEnd, sf::Vector2f levelS
     shape->setFillColor(sf::Color::Magenta);
 }
 
+/**
+ * @brief controls enemy movement; it moves back and forth between 2 positions
+ * @param timeElapsed time since the last frame
+ */
 void Enemy::move(int timeElapsed) {
 
     timeElapsed *= simSpeed;
