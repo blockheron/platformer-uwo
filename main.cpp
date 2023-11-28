@@ -21,6 +21,7 @@ int main() {
     shared_ptr<sf::RenderWindow> mainWindow(nullptr);
 
     mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode::getFullscreenModes()[0], "Platformer", sf::Style::Fullscreen);
+    cout << sf::VideoMode::getFullscreenModes()[0].width << " x " << sf::VideoMode::getFullscreenModes()[0].height;
 
     int select;
 
@@ -58,6 +59,12 @@ int main() {
                     mainWindow->close();
                     break;
                 }
+            }
+            else if (gameEvent == 2) {
+                //open level select menu...
+            }
+            else if (gameEvent == 3) {
+                continue;
             }
             else if (gameEvent == -1) {
                 break; //game was closed
