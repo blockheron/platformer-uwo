@@ -20,6 +20,21 @@ public:
     Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size);
 
 private:
+//    const float speed = 0.002;
+//    const unsigned int lowerXBound = 0; //temporary
+//    unsigned int lowerYBound; //temporary
+//    const float gravity = -0.0000002;
+//    const float initialJumpVelocity = 0.008;
+//    const float midJumpAcceleration = 0.0000001;
+//    const float terminalVelocity = -0.1;
+//    const float simSpeed = 0.25;
+//    float vy = 0;
+//    float ay = 0;
+//    bool jumped = false;
+//    sf::Vector2<float> prevPosition;
+    sf::Texture textureRight;
+    sf::Texture textureLeft;
+
     void move(int timeElapsed) override;   // made private as it's inherited from Animate
 };
 

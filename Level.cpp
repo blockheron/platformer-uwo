@@ -6,6 +6,7 @@
  */
 #include "Level.h"
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -13,15 +14,18 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 
     gameClock; //start the game clock to time physics
 
+    backgroundTexture.loadFromFile("Resources/Images/Background.png");
+
     load(levelName);
-    player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
+    //player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
 
     for (int i=0; i<enemyStartPositions.size(); i++) {  // initialise enemies
-        enemies.push_back(enemy = new Enemy(enemyStartPositions.at(i), enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE)));
+        enemies.push_back(enemy = new Enemy(enemyStartPositions.at(i), enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE/2)));
     }
 
     floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
     floor.setPosition(sf::Vector2f(0, size.y));
+    player = new Player(start, size, sf::Vector2f(GRIDSIZE, 2*GRIDSIZE)); //initialize player
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
@@ -60,7 +64,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             }
         }
         // set the background
-        window->clear(sf::Color::Black);
+        window->clear(sf::Color(45,33,21));
 
         bool deathCollision = false;
         for (int i=0; i<deathObjects.size(); i++) {
@@ -99,7 +103,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             if (player->collides(enemies.at(i))) {
 
                 // player kills enemy by colliding with enemy from top
-                if (player->getPrevPosition().y < enemies.at(i)->getPositionY()) {
+                if (player->getPrevPosition().y+player->getSize().y < enemies.at(i)->getPositionY()) {
                     enemies.at(i)->getShape()->setFillColor(sf::Color::Transparent);
                     enemies.erase(enemies.begin()+i);   // actually deletes enemy object
                 }
@@ -129,8 +133,12 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         window->setView(*camera);
 
         //draw the objects in the game
+        for (int i=0; i<backgrounds.size(); ++i) {
+            window->draw(*backgrounds.at(i));
+            //cout<<backgrounds.at(i)->getPosition().x<<endl;
+        }
+        //window->draw(floor);
         window->draw(*player->getShape());
-        window->draw(floor);
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
         }
@@ -148,6 +156,8 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         // end the current frame
         window->display();
     }
+
+    return -1;
 }
 
 bool Level::load(std::string levelName) {
@@ -159,6 +169,12 @@ bool Level::load(std::string levelName) {
     if (!loadSuccess) return false; //return false if image isn't loaded correctly
 
     size = sf::Vector2f(map->getSize().x*GRIDSIZE, map->getSize().y*GRIDSIZE);//get the size for player boundaries
+
+    int backgroundNum = ceil(float(map->getSize().y*GRIDSIZE)/float(BACKGROUND_WIDTH));
+    for (int i = -1; i < backgroundNum+1; ++i) {
+        backgrounds.push_back(new sf::Sprite(backgroundTexture));
+        backgrounds.at(i+1)->setPosition(i*BACKGROUND_WIDTH,  size.y+BACKGROUND_HEIGHT);
+    }
 
     for (unsigned int i = 0; i < map->getSize().y; ++i) {
 
@@ -178,7 +194,7 @@ bool Level::load(std::string levelName) {
                 start = sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE);
             }
             else if (c==sf::Color::Magenta) {//get enemy starting position and spawn enemies
-                enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
+                enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE+GRIDSIZE/2));
             }
             else if (c==sf::Color::Cyan) {//get enemy ending position
                 enemyEndPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
