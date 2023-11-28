@@ -86,7 +86,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 // player kills enemy by colliding with enemy from top
                 if (player->getPrevPosition().y+player->getSize().y < enemies.at(i)->getPositionY()) {
                     enemies.at(i)->getShape()->setFillColor(sf::Color::Transparent);
-                    enemies.erase(enemies.begin()+1);   // actually deletes enemy object
+                    enemies.erase(enemies.begin()+i);   // actually deletes enemy object
                 }
                 else {
                     return 0;       // any other kind of collision causes death
