@@ -24,10 +24,8 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
     floor.setPosition(sf::Vector2f(0, size.y));
 
     //Set scoring
-    scoreObjects.push_back(new Score(sf::Vector2f(700, 500),sf::Vector2f(GRIDSIZE, GRIDSIZE)));
-    for (int i = 0; i < scoreObjects.size(); i++) {
-        window->draw(*scoreObjects.at(i)->getShape());
-    }
+    scoreObjects.push_back(new Score(sf::Vector2f(GRIDSIZE, GRIDSIZE),sf::Vector2f(GRIDSIZE, GRIDSIZE)));
+    //window->draw(*scoreObjects->getShape());
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
@@ -35,9 +33,11 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 
 int Level::play(shared_ptr<sf::RenderWindow> window) {
     sf::Event event;
-    while (window->isOpen()) {
+    while (window->isOpen())
+    {
         // check all the window's events that were triggered since the last iteration of the loop
-        while (window->pollEvent(event)) {
+        while (window->pollEvent(event))
+        {
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed) {
                 window->close();
@@ -47,11 +47,11 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         window->clear(sf::Color::Black);
 
         //get the time elapsed since last frame
-        //int elapsed = gameClock.restart().asMicroseconds();
+        int elapsed = gameClock.restart().asMicroseconds();
         // Display score
         //scoring = new Score();
         bool deathCollision = false;
-        for (int i = 0; i < deathObjects.size(); i++) {
+        for (int i=0; i<deathObjects.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
              * Will leave for later.
@@ -60,7 +60,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 return 0;
             }
         }
-        for (int i = 0; i < rewardObjects.size(); i++) {
+        for (int i=0; i<rewardObjects.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
              * Will leave for later.
@@ -68,11 +68,11 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             if (player->collides(rewardObjects.at(i))) {
                 rewardObjects.at(i)->collect();
 
-                //   scoring->increment();
+             //   scoring->increment();
                 //cout << (scoring->getScore())->getString();
             }
         }
-        for (int i = 0; i < terrain.size(); i++) {
+        for (int i=0; i<terrain.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
              * Will leave for later.
@@ -81,7 +81,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 player->collided(terrain.at(i));
             }
         }
-        for (int i = 0; i < goals.size(); i++) {
+        for (int i=0; i<goals.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
              * Will leave for later.
@@ -91,7 +91,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             }
         }
 
-        for (int i = 0; i < enemies.size(); i++) {
+        for (int i=0; i<enemies.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
              * Will leave for later.
@@ -101,8 +101,9 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 // player kills enemy by colliding with enemy from top
                 if (player->getPrevPosition().y < enemies.at(i)->getPositionY()) {
                     enemies.at(i)->getShape()->setFillColor(sf::Color::Transparent);
-                    enemies.erase(enemies.begin() + i);   // actually deletes enemy object
-                } else {
+                    enemies.erase(enemies.begin()+i);   // actually deletes enemy object
+                }
+                else {
                     return 0;       // any other kind of collision causes death
                 }
 
@@ -114,7 +115,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         if (elapsed > 10000) elapsed = 0; // fixes teleportation for resizing window
         player->Update(elapsed);
 
-        for (int i = 0; i < enemies.size(); i++) {
+        for (int i=0; i<enemies.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
              * Will leave for later.
@@ -131,20 +132,20 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         window->draw(*player->getShape());
         window->draw(floor);
 
-        for (int i = 0; i < deathObjects.size(); i++) {
+        for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
         }
-        for (int i = 0; i < rewardObjects.size(); i++) {
+        for (int i=0; i<rewardObjects.size(); i++) {
             window->draw(*rewardObjects.at(i)->getShape());
         }
-        for (int i = 0; i < terrain.size(); i++) {
+        for (int i=0; i<terrain.size(); i++) {
             window->draw(*terrain.at(i)->getShape());
         }
-        for (int i = 0; i < goals.size(); i++) {
+        for (int i=0; i<goals.size(); i++) {
             window->draw(*goals.at(i)->getShape());
         }
-        //   window->draw(scoring->getScore());
-        for (int i = 0; i < enemyStartPositions.size(); i++) {
+     //   window->draw(scoring->getScore());
+        for (int i=0; i<enemyStartPositions.size(); i++) {
             window->draw(*enemy->getShape());
         }
 
