@@ -11,12 +11,13 @@
 #include "Animate.h"
 #include <SFML/Graphics.hpp>
 
+/**
+ * @brief an Player object's methods and instances. It also inherits from Animate and Object
+ */
 class Player : public Animate {
 public:
     using Animate::Animate;
     Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size);
-//    void Update(int timeElapsed);
-//    void collided(Object* terrain); //assumed to be terrain for now
 
 private:
 //    const float speed = 0.002;

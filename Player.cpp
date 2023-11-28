@@ -5,11 +5,16 @@
  * @bug no known bugs
  */
 
-#include <iostream>
 #include "Player.h"
 
 using namespace std;
 
+/**
+ * @brief the constructor for a Player object
+ * @param start starting position for a player on a level
+ * @param levelSize 2d size of the level
+ * @param size size of the player
+ */
 Player::Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size) : Animate(levelSize, size) {
 
     shape->move(start);
@@ -20,6 +25,10 @@ Player::Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size) : 
 
 }
 
+/**
+ * @brief control player left/right and jump movement with WASD keys
+ * @param timeElapsed time since the last frame
+ */
 void Player::move(int timeElapsed) {
 
     timeElapsed *= simSpeed;
