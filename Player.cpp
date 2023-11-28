@@ -13,7 +13,9 @@ using namespace std;
 Player::Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size) : Animate(levelSize, size) {
 
     shape->move(start);
-    shape->setFillColor(sf::Color::Blue);
+    texture.loadFromFile("Resources/Images/Main-Character.png");
+    shape->setTexture(&texture);
+    //shape->setFillColor(sf::Color::Blue);
 
 }
 

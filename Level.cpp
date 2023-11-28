@@ -17,7 +17,7 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
     backgroundTexture.loadFromFile("Resources/Images/Background.png");
 
     load(levelName);
-    player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
+    player = new Player(start, size, sf::Vector2f(GRIDSIZE, 2*GRIDSIZE)); //initialize player
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
@@ -112,6 +112,8 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         // end the current frame
         window->display();
     }
+
+    return -1;
 }
 
 bool Level::load(std::string levelName) {
