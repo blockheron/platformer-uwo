@@ -32,6 +32,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
     while (window->isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
         while (window->pollEvent(event))
         {
             // "close requested" event: we close the window
@@ -130,7 +131,6 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         //draw the objects in the game
         window->draw(*player->getShape());
         window->draw(floor);
-
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
         }
@@ -140,6 +140,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         for (int i=0; i<goals.size(); i++) {
             window->draw(*goals.at(i)->getShape());
         }
+     //   window->draw(scoring->getScore());
         for (int i=0; i<enemyStartPositions.size(); i++) {
             window->draw(*enemy->getShape());
         }
