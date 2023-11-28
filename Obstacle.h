@@ -5,8 +5,8 @@
  * @bug no known bugs
  */
 
-#ifndef PLATFORMER_OBSTACLES_H
-#define PLATFORMER_OBSTACLES_H
+#ifndef PLATFORMER_OBSTACLE_H
+#define PLATFORMER_OBSTACLE_H
 
 #include "Object.h"
 #include <SFML/Graphics.hpp>
@@ -20,4 +20,4 @@ private:
 };
 
 
-#endif //PLATFORMER_PLAYER_H
+#endif //PLATFORMER_OBSTACLE_H
