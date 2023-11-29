@@ -1,6 +1,6 @@
 /**
  * @file Menu.cpp
- * @brief
+ * @brief Handles any menus (level select, pause, etc.)
  * @author Jake
  * @bug no known bugs
  */

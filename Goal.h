@@ -1,6 +1,6 @@
 /**
  * @file Goal.h
- * @brief
+ * @brief the header file for Goal.cpp
  * @author Jake
  * @bug no known bugs
  */

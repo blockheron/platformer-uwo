@@ -1,6 +1,6 @@
 /**
  * @file Level.h
- * @brief
+ * @brief The header file for Level.cpp
  * @author Liam, Karen, Jake, Emma
  * @bug no known bugs
  */

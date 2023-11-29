@@ -1,6 +1,6 @@
 /**
  * @file Goal.cpp
- * @brief
+ * @brief object that finishes the level on collision
  * @author Jake, Karen
  * @bug no known bugs
  */
