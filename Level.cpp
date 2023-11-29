@@ -20,18 +20,11 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
     //player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
 
     for (int i=0; i<enemyStartPositions.size(); i++) {  // initialise enemies
-        enemies.push_back(enemy = new Enemy(enemyStartPositions.at(i), enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE/2)));
+        enemies.push_back(enemy = new Enemy(*enemyStartPositions.at(i), *enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE/2)));
     }
 
-    floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
-    floor.setPosition(sf::Vector2f(0, size.y));
-
-    // Score
-   // scoreObjects.push_back(new Score(sf::Vector2f(500, 400), sf::Vector2f(GRIDSIZE, GRIDSIZE)));
-   // for (int i=0; i<scoreObjects.size(); i++) {
-    //    window->draw(*scoreObjects.at(i)->getShape());
-    //}
-
+    //floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
+    //floor.setPosition(sf::Vector2f(0, size.y));
     player = new Player(start, size, sf::Vector2f(GRIDSIZE, 2*GRIDSIZE)); //initialize player
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
@@ -166,8 +159,8 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             window->draw(*goals.at(i)->getShape());
         }
      //   window->draw(scoring->getScore());
-        for (int i=0; i<enemyStartPositions.size(); i++) {
-            window->draw(*enemy->getShape());
+        for (int i=0; i<enemies.size(); i++) {
+            window->draw(*enemies.at(i)->getShape());
         }
 
         // end the current frame
@@ -192,15 +185,15 @@ bool Level::load(std::string levelName) {
 
     size = sf::Vector2f(map->getSize().x*GRIDSIZE, map->getSize().y*GRIDSIZE);//get the size for player boundaries
 
-    int backgroundNum = ceil(float(map->getSize().y*GRIDSIZE)/float(BACKGROUND_WIDTH));
+    int backgroundNum = ceil(float(map->getSize().x*GRIDSIZE)/float(BACKGROUND_WIDTH));
     for (int i = -1; i < backgroundNum+1; ++i) {
         backgrounds.push_back(new sf::Sprite(backgroundTexture));
         backgrounds.at(i+1)->setPosition(i*BACKGROUND_WIDTH,  size.y+BACKGROUND_HEIGHT);
     }
 
-    for (unsigned int i = 0; i < map->getSize().y; ++i) {
+    for (unsigned int i = 0; i < map->getSize().x; ++i) {
 
-        for (unsigned int j = 0; j < map->getSize().x; ++j) {
+        for (unsigned int j = 0; j < map->getSize().y; ++j) {
 
             sf::Color c = map->getPixel(i, j); //get the colour of each pixel
             if (c == sf::Color::White) {//create terrain
@@ -222,10 +215,10 @@ bool Level::load(std::string levelName) {
                 scoreObjects.push_back(new Coin(sf::Vector2f(GRIDSIZE, GRIDSIZE), sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE)));
             }
             else if (c==sf::Color::Magenta) {//get enemy starting position and spawn enemies
-                enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE+GRIDSIZE/2));
+                enemyStartPositions.push_back(new sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE+GRIDSIZE/2));
             }
             else if (c==sf::Color::Cyan) {//get enemy ending position
-                enemyEndPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
+                enemyEndPositions.push_back(new sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
 
             }
 

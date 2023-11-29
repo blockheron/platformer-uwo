@@ -47,8 +47,8 @@ private:
     sf::View* camera;
     Enemy* enemy;
     std::vector<Enemy*> enemies;
-    std::vector<sf::Vector2f> enemyStartPositions;  // setting points where enemy walks
-    std::vector<sf::Vector2f> enemyEndPositions;
+    std::vector<sf::Vector2f*> enemyStartPositions;  // setting points where enemy walks
+    std::vector<sf::Vector2f*> enemyEndPositions;
 
 };
 
