@@ -13,10 +13,18 @@
 
 class Coin : public Object {
 public:
+    /**
+     * @brief Coin constructor
+     * @author Karen
+     * @param size the size of the goal to be created
+     * @param pos the position of the goal to be created
+     * @bug no known bugs
+     */
     Coin(sf::Vector2f size, sf::Vector2f pos);
     //void collect(); // Collect coin
 
 private:
+    /// Vector to store position
     sf::Vector2f position;
 };
 

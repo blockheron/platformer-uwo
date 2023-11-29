@@ -1,4 +1,3 @@
-
 /**
  * @file Coin.h
  * @brief Header for Score.cpp
@@ -13,6 +12,13 @@
 
 class Score : public Object {
 public:
+    /**
+     * @brief Score constructor
+     * @author Karen
+     * @param size the size of the goal to be created
+     * @param pos the position of the goal to be created
+     * @bug no known bugs
+     */
     Score(sf::Vector2f size, sf::Vector2f pos);
     /*  Score();
       void increment();
@@ -20,6 +26,7 @@ public:
     //void collect(); //Collect coin
 
 private:
+    /// Variable for position
     sf::Vector2f position;
     /*sf::Text score;
     std::string nonConstStr;*/
