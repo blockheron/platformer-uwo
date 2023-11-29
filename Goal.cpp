@@ -1,11 +1,14 @@
 /**
  * @file Goal.cpp
  * @brief
- * @author Jake
+ * @author Jake, Karen
  * @bug no known bugs
  */
 
 #include "Goal.h"
+
+static sf::Texture* texture = new sf::Texture();
+static bool texturesCreated = false;
 
 /**
  * @brief creates a new goal/endpoint
@@ -13,6 +16,13 @@
  * @param pos the position of the goal to be created
  */
 Goal::Goal(sf::Vector2f size, sf::Vector2f pos) : position(pos), Object(size) {
+    //load textures
+    if (!texturesCreated) {
+        texture->loadFromFile("Resources/Images/door.png");
+        texturesCreated = true;
+    }
+
+    shape->setTexture(texture);
     shape->setPosition(position.x, position.y);
-    shape->setFillColor(sf::Color::Green);
+    //shape->setFillColor(sf::Color::Green);
 }
