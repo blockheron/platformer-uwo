@@ -7,7 +7,13 @@
 
 #include "Score.h"
 
-// Score constructor
+/**
+ * @brief Score constructor
+ * @author Karen
+ * @param size the size of the goal to be created
+ * @param pos the position of the goal to be created
+ * @bug no known bugs
+ */
 Score::Score(sf::Vector2f size, sf::Vector2f pos) : position(pos), Object(size) {
     shape->setPosition(position.x, position.y);
     shape->setFillColor(sf::Color::Yellow);

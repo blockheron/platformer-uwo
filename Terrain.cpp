@@ -10,6 +10,7 @@ static bool texturesCreated = false;
 
 /**
  * @brief Terrain constructor
+ * @author Liam
  * @param size the size of the terrain object to be created
  * @param pos the position for the terrain to be created at
  */

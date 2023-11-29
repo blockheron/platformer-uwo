@@ -16,12 +16,12 @@ static bool texturesCreated = false;
  * @param pos the position of the goal to be created
  */
 Goal::Goal(sf::Vector2f size, sf::Vector2f pos) : position(pos), Object(size) {
-    //load textures
+    /// Load textures
     if (!texturesCreated) {
         texture->loadFromFile("Resources/Images/door.png");
         texturesCreated = true;
     }
-
+    /// Set Texture and Position
     shape->setTexture(texture);
     shape->setPosition(position.x, position.y);
     //shape->setFillColor(sf::Color::Green);
