@@ -19,6 +19,7 @@
 #include "Obstacle.h"
 #include "Terrain.h"
 #include "Goal.h"
+#include "Menu.h"
 #include "Coin.h"
 #include "Score.h"
 #include "Enemy.h"
@@ -28,6 +29,7 @@ public:
     Level(std::shared_ptr<sf::RenderWindow> window, std::string levelName);
     int play(std::shared_ptr<sf::RenderWindow> window);
     bool load(std::string levelName);
+    int getLevel();
 private:
     //Initialize needed variables
     bool coinsCollect = false;
@@ -49,7 +51,7 @@ private:
     std::vector<Enemy*> enemies;
     std::vector<sf::Vector2f*> enemyStartPositions;  // setting points where enemy walks
     std::vector<sf::Vector2f*> enemyEndPositions;
-
+    int levelNum;
 };
 
 

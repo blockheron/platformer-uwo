@@ -12,11 +12,14 @@ using namespace std;
 
 Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 
+    string currLevelName = levelName;
+    levelName.erase(0, 5);
+    levelNum = stoi(levelName);
     gameClock; //start the game clock to time physics
 
     backgroundTexture.loadFromFile("Resources/Images/Background.png");
 
-    load(levelName);
+    load(currLevelName);
     //player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
 
     for (int i=0; i<enemyStartPositions.size(); i++) {  // initialise enemies
@@ -31,6 +34,10 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 
 }
 
+int Level::getLevel() {
+    return levelNum;
+}
+
 int Level::play(shared_ptr<sf::RenderWindow> window) {
     sf::Event event;
     while (window->isOpen())
@@ -42,6 +49,24 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed) {
                 window->close();
+            }
+            // pause menu
+            else if (event.type == sf::Event::KeyPressed) {
+                 if (event.key.scancode == sf::Keyboard::Scan::Escape) {
+                     window->setView(sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y)));
+                     int pauseSelect = PauseMenu(window);
+                     if (pauseSelect == 1) {
+                         return 2;
+                     }
+                     else if (pauseSelect == 2) {
+                         // open main menu again
+                         return 3;
+                     }
+                     else if (pauseSelect == -1) {
+                         window->close();
+                         return -1;
+                     }
+                 }
             }
         }
         // set the background
