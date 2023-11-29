@@ -32,4 +32,4 @@ private:
     std::string nonConstStr;*/
 };
 
-#endif //PLATFORMER_SCORE_H
+#endif ///PLATFORMER_SCORE_H

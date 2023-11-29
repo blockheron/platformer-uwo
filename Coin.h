@@ -29,4 +29,4 @@ private:
 };
 
 
-#endif //PLATFORMER_COIN_H
+#endif /// PLATFORMER_COIN_H

@@ -21,7 +21,7 @@ Goal::Goal(sf::Vector2f size, sf::Vector2f pos) : position(pos), Object(size) {
         texture->loadFromFile("Resources/Images/door.png");
         texturesCreated = true;
     }
-    // Set Texture and Position
+    /// Set Texture and Position
     shape->setTexture(texture);
     shape->setPosition(position.x, position.y);
     //shape->setFillColor(sf::Color::Green);

@@ -25,4 +25,4 @@ private:
     sf::Vector2f position;
 };
 
-#endif //PLATFORMER_GOAL_H
+#endif ///PLATFORMER_GOAL_H
