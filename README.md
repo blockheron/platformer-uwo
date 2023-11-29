@@ -22,7 +22,7 @@ set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR "libraries/SFML-2.6.0/lib/cmake/SFML")
 
 find_package(SFML 2.6 COMPONENTS graphics audio system window REQUIRED)
-add_executable(Platformer main.cpp Player.cpp Player.h Level.cpp Level.h Obstacle.cpp Obstacle.h Object.cpp Object.h Menu.cpp Menu.h Goal.cpp Goal.h)
+add_executable(Platformer main.cpp Player.cpp Player.h Level.cpp Level.h Obstacle.cpp Obstacle.h Object.cpp Object.h Menu.cpp Menu.h Goal.cpp Goal.h Terrain.cpp Terrain.h Animate.cpp Animate.h Enemy.cpp Enemy.h Coin.cpp Coin.h Score.cpp Score.h User.cpp User.h)
 target_link_libraries(Platformer sfml-graphics sfml-audio sfml-system sfml-window -static)
 ```
 
