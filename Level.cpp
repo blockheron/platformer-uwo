@@ -23,11 +23,11 @@ Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
     //player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
 
     for (int i=0; i<enemyStartPositions.size(); i++) {  // initialise enemies
-        enemies.push_back(enemy = new Enemy(enemyStartPositions.at(i), enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE/2)));
+        enemies.push_back(enemy = new Enemy(*enemyStartPositions.at(i), *enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE/2)));
     }
 
-    floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
-    floor.setPosition(sf::Vector2f(0, size.y));
+    //floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
+    //floor.setPosition(sf::Vector2f(0, size.y));
     player = new Player(start, size, sf::Vector2f(GRIDSIZE, 2*GRIDSIZE)); //initialize player
 
     camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
@@ -83,6 +83,29 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 return 0;
             }
         }
+        for (int i=0; i<rewardObjects.size(); i++) {
+            /**
+             * Want to change to checking first if in current view, then check for collision.
+             * Will leave for later.
+             */
+            if (player->collides(rewardObjects.at(i))) {
+                rewardObjects.at(i)->collect(); // Hide coin
+                coinsCollect=true;
+                scoreObjects.at(i)->show();
+            }
+        }
+        for (int i=0; i<scoreObjects.size(); i++) {// Hide score
+            /**
+             * Want to change to checking first if in current view, then check for collision.
+             * Will leave for later.
+             */
+            if (coinsCollect==false){
+                scoreObjects.at(i)->collect();
+            }
+
+        }
+
+
         for (int i=0; i<terrain.size(); i++) {
             /**
              * Want to change to checking first if in current view, then check for collision.
@@ -149,6 +172,12 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
         }
+        for (int i=0; i<rewardObjects.size(); i++) {
+            window->draw(*rewardObjects.at(i)->getShape());
+        }
+        for (int i=0; i<scoreObjects.size(); i++) {
+            window->draw(*scoreObjects.at(i)->getShape());
+        }
         for (int i=0; i<terrain.size(); i++) {
             window->draw(*terrain.at(i)->getShape());
         }
@@ -156,8 +185,8 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
             window->draw(*goals.at(i)->getShape());
         }
      //   window->draw(scoring->getScore());
-        for (int i=0; i<enemyStartPositions.size(); i++) {
-            window->draw(*enemy->getShape());
+        for (int i=0; i<enemies.size(); i++) {
+            window->draw(*enemies.at(i)->getShape());
         }
 
         // end the current frame
@@ -167,6 +196,11 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
     return -1;
 }
 
+/**
+ * @brief loads levels from png images in resources
+ * @param levelName the name of the level to load
+ * @return true if the level is loaded, false if loading fails
+ */
 bool Level::load(std::string levelName) {
 
     //load the map from an image into an array of pixels
@@ -177,15 +211,15 @@ bool Level::load(std::string levelName) {
 
     size = sf::Vector2f(map->getSize().x*GRIDSIZE, map->getSize().y*GRIDSIZE);//get the size for player boundaries
 
-    int backgroundNum = ceil(float(map->getSize().y*GRIDSIZE)/float(BACKGROUND_WIDTH));
+    int backgroundNum = ceil(float(map->getSize().x*GRIDSIZE)/float(BACKGROUND_WIDTH));
     for (int i = -1; i < backgroundNum+1; ++i) {
         backgrounds.push_back(new sf::Sprite(backgroundTexture));
         backgrounds.at(i+1)->setPosition(i*BACKGROUND_WIDTH,  size.y+BACKGROUND_HEIGHT);
     }
 
-    for (unsigned int i = 0; i < map->getSize().y; ++i) {
+    for (unsigned int i = 0; i < map->getSize().x; ++i) {
 
-        for (unsigned int j = 0; j < map->getSize().x; ++j) {
+        for (unsigned int j = 0; j < map->getSize().y; ++j) {
 
             sf::Color c = map->getPixel(i, j); //get the colour of each pixel
             if (c == sf::Color::White) {//create terrain
@@ -200,11 +234,17 @@ bool Level::load(std::string levelName) {
             else if (c==sf::Color::Blue) {//get player starting position
                 start = sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE);
             }
+            else if (c==sf::Color::Yellow) { //Create coins
+                rewardObjects.push_back(new Coin(sf::Vector2f(GRIDSIZE, GRIDSIZE), sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE)));
+            }
+            else if (c==sf::Color(128,0,128)){//Create scores
+                scoreObjects.push_back(new Coin(sf::Vector2f(GRIDSIZE, GRIDSIZE), sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE)));
+            }
             else if (c==sf::Color::Magenta) {//get enemy starting position and spawn enemies
-                enemyStartPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE+GRIDSIZE/2));
+                enemyStartPositions.push_back(new sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE+GRIDSIZE/2));
             }
             else if (c==sf::Color::Cyan) {//get enemy ending position
-                enemyEndPositions.push_back(sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
+                enemyEndPositions.push_back(new sf::Vector2f(i*GRIDSIZE, j*GRIDSIZE));
 
             }
 

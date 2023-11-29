@@ -22,7 +22,6 @@ Player::Player(sf::Vector2f start, sf::Vector2f levelSize, sf::Vector2f size) : 
     textureLeft.loadFromFile("Resources/Images/Main-Character-Left.png");
     shape->setTexture(&textureRight);
     //shape->setFillColor(sf::Color::Blue);
-
 }
 
 /**
