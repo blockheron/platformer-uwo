@@ -30,29 +30,29 @@ User::User(string userName, shared_ptr<sf::RenderWindow> window) {
                     levels.push_back(token);
                     line.erase(0, pos+delimiter.length());
                 }
+                token = line.substr(0, pos);
+                levels.push_back(token);
                 break;
             }
         }
-        if (!levels.empty()) {
-            for (int i=0; i < levels.size(); i++) {
-                accessibleLevels.push_back(new Level(mainWindow, levels[i]));
-            }
-        }
-        else {
+        if (levels.empty()) {
             levels.push_back("level1");
-            accessibleLevels.push_back(new Level(mainWindow, levels[0]));
         }
     }
 }
 
 void User::saveState(int levelCompleted) {
-    string nextLevel = "level" + (levelCompleted + 1);
-    levels.push_back(nextLevel);
-    accessibleLevels.push_back(new Level(mainWindow, levels.back()));
+    if (levelCompleted < 5 && levelCompleted >= levels.size()) {
+        string nextLevel = "level" + to_string(levelCompleted + 1);
+        levels.push_back(nextLevel);
+    }
+    else if (levelCompleted >= 5) {
+        levels.push_back("complete");
+    }
 }
 
 int User::getNumAccessibleLevels() {
-    return accessibleLevels.size();
+    return levels.size();
 }
 
 void User::updateMeta() {

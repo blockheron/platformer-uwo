@@ -10,10 +10,13 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include "User.h"
 
 int MainMenu(std::shared_ptr<sf::RenderWindow> window);
 int GameOver(std::shared_ptr<sf::RenderWindow> window);
 int LevelComplete(std::shared_ptr<sf::RenderWindow> window);
 int PauseMenu(std::shared_ptr<sf::RenderWindow> window);
+int LevelSelectPause(std::shared_ptr<sf::RenderWindow> window);
+int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window);
 
 #endif //PLATFORMER_MENU_H

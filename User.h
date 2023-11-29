@@ -22,7 +22,6 @@ public:
 private:
     string user;
     vector<string> levels;
-    vector<Level*> accessibleLevels;
     shared_ptr<sf::RenderWindow> mainWindow;
 };
 

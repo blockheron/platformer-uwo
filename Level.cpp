@@ -56,8 +56,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                      window->setView(sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y)));
                      int pauseSelect = PauseMenu(window);
                      if (pauseSelect == 1) {
-                         // close level and open level select menu
-                         // return 2;
+                         return 2;
                      }
                      else if (pauseSelect == 2) {
                          // open main menu again
