@@ -1,6 +1,6 @@
 /**
  * @file Player.cpp
- * @brief
+ * @brief handles player movement and collisions
  * @author Liam, Karen, Jake, Emma
  * @bug no known bugs
  */
