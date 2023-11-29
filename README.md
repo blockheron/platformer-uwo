@@ -37,7 +37,22 @@ include_directories(/usr/local/include)
 include_directories(${SFML_INCLUDE_DIRS})
 
 find_package(SFML 2.6 COMPONENTS graphics audio system window REQUIRED)
-add_executable(group14 main.cpp Player.cpp Player.h Level.cpp Level.h Menu.h Menu.cpp Obstacle.h Obstacle.cpp Object.h Object.cpp Goal.h Goal.cpp)
+add_executable(
+        group14
+        main.cpp
+        Player.h Player.cpp
+        Level.h Level.cpp
+        Menu.h Menu.cpp
+        Obstacle.h Obstacle.cpp
+        Object.h Object.cpp
+        Goal.h Goal.cpp
+        Terrain.h Terrain.cpp
+        Animate.h Animate.cpp
+        Enemy.h Enemy.cpp
+        Score.h Score.cpp
+        Coin.h Coin.cpp
+        User.h User.cpp
+)
 target_link_libraries(group14 sfml-graphics sfml-audio sfml-system sfml-window)
 ```
 
@@ -60,4 +75,4 @@ For mac we recommend the following:
 
 Use 'A' and 'D' keys to move right and left. Use Space or 'W' key to jump. 
 
-Avoid the red obstacles and move into the green obstacle to complete the game.
+Avoid the fire and spiders, collect the coins, and move to the portal to complete the level.
