@@ -21,7 +21,6 @@ int main() {
     shared_ptr<sf::RenderWindow> mainWindow(nullptr);
 
     mainWindow = make_shared<sf::RenderWindow> (sf::VideoMode::getFullscreenModes()[0], "Platformer", sf::Style::Fullscreen);
-    cout << sf::VideoMode::getFullscreenModes()[0].width << " x " << sf::VideoMode::getFullscreenModes()[0].height;
 
     int select;
 
