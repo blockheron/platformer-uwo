@@ -1,13 +1,18 @@
-//
-// Created by Liam on 2023-11-11.
-//
+/**
+ * @brief Objects the player can collide with without being harmed
+ * @author Liam
+ */
 
 #include "Terrain.h"
 
 static sf::Texture* texture = new sf::Texture();
 static bool texturesCreated = false;
 
-// Terrain constructor
+/**
+ * @brief Terrain constructor
+ * @param size the size of the terrain object to be created
+ * @param pos the position for the terrain to be created at
+ */
 Terrain::Terrain(sf::Vector2f size, sf::Vector2f pos) : position(pos), Object(size) {
     shape->setPosition(position.x, position.y);
     if (!texturesCreated) {
