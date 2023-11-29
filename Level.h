@@ -27,6 +27,7 @@ public:
     Level(std::shared_ptr<sf::RenderWindow> window, std::string levelName);
     int play(std::shared_ptr<sf::RenderWindow> window);
     bool load(std::string levelName);
+    int getLevel();
 private:
     //Initialize needed variables
     sf::Clock gameClock;
@@ -45,6 +46,7 @@ private:
     std::vector<Enemy*> enemies;
     std::vector<sf::Vector2f> enemyStartPositions;  // setting points where enemy walks
     std::vector<sf::Vector2f> enemyEndPositions;
+    int levelNum;
 };
 
 
