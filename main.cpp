@@ -28,14 +28,11 @@ int main() {
     {
         mainWindow->setView(sf::View(sf::FloatRect(0, 0, mainWindow->getSize().x, mainWindow->getSize().y)));
         select = MainMenu(mainWindow);
-        /*
-         * We will have different selections available in main menu. For now just a play button.
-         */
         if (!mainWindow->isOpen()||select == 0) {
             break;
         }
         else if (select == 2) {
-            Level* level = new Level(mainWindow, "level2");
+            Level* level = new Level(mainWindow, "testLevelEnemy");
             int gameEvent = level->play(mainWindow);
             if (gameEvent == 0) {
                 mainWindow->setView(sf::View(sf::FloatRect(0, 0, mainWindow->getSize().x, mainWindow->getSize().y)));
