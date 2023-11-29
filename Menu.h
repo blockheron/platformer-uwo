@@ -1,6 +1,6 @@
 /**
  * @file Menu.h
- * @brief This class actually just includes any and all menus.(Main Menu, Pause Menu, Settings Menu, Any End Screens/Game Over Screens, Option/Help Menu)
+ * @brief Header file for Menu.cpp
  * @author Jake
  * @bug no known bugs
  */

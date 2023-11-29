@@ -1,6 +1,6 @@
 /**
  * @file Obstacle.cpp
- * @brief
+ * @brief defines objects that kill the player when touched
  * @author Karen
  * @bug no known bugs
  */

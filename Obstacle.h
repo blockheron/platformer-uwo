@@ -1,6 +1,6 @@
 /**
  * @file Obstacle.h
- * @brief
+ * @brief the header for Obstacle.cpp
  * @author Karen, Jake
  * @bug no known bugs
  */

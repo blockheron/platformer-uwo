@@ -1,6 +1,6 @@
 /**
  * @file Player.h
- * @brief A class for moving, animate objects
+ * @brief the header for Player.cpp
  * @author Liam, Karen, Jake, Emma
  * @bug no known bugs
  */

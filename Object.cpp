@@ -1,6 +1,6 @@
 /**
  * @file Object.cpp
- * @brief
+ * @brief defines methods and attributes any object in the game will have
  * @author Jake, Karen
  * @bug no known bugs
  */

@@ -1,6 +1,6 @@
 /**
  * @file Level.cpp
- * @brief
+ * @brief Handles drawing and collisions while a level is playing
  * @author  Liam, Karen, Jake, Emma
  * @bug no known bugs
  */

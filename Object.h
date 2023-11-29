@@ -1,6 +1,6 @@
 /**
  * @file Object.h
- * @brief
+ * @brief the header for Object.cpp
  * @author Jake, Karen
  * @bug no known bugs
  */
