@@ -9,6 +9,11 @@
 
 using namespace std;
 
+/**
+ * @brief This is the main menu function.
+ * @param window    the window to draw the main menu to
+ * @return          returns an integer based on the user selection
+ */
 int MainMenu(shared_ptr<sf::RenderWindow> window) {
     // set background
     window->clear(sf::Color::Black);
@@ -30,10 +35,6 @@ int MainMenu(shared_ptr<sf::RenderWindow> window) {
     playButton.setPosition(window->getSize().x/2, (window->getSize().y/3)*2);
     playButton.setColor(sf::Color(208, 169, 51));
 
-    window->draw(title);
-    window->draw(playButton);
-    window->display();
-
     sf::Event evt;
     while (1) {
         while (window->pollEvent(evt)) {
@@ -41,7 +42,7 @@ int MainMenu(shared_ptr<sf::RenderWindow> window) {
                 window->close();
                 return 0;
             }
-            else if (evt.type == sf::Event::MouseMoved) {
+            else if (evt.type == sf::Event::MouseMoved) { //if mouse hovers over sprites
                 sf::Vector2f MPos;
                 MPos.x = sf::Mouse::getPosition(*window).x;
                 MPos.y = sf::Mouse::getPosition(*window).y;
@@ -52,7 +53,7 @@ int MainMenu(shared_ptr<sf::RenderWindow> window) {
                     playButton.setColor(sf::Color(208, 169, 51));
                 }
             }
-            else if (evt.type == sf::Event::MouseButtonPressed) {
+            else if (evt.type == sf::Event::MouseButtonPressed) { //if mouse clicks while hovering over sprite
                 sf::Vector2f MPos;
                 MPos.x = sf::Mouse::getPosition(*window).x;
                 MPos.y = sf::Mouse::getPosition(*window).y;
@@ -69,6 +70,11 @@ int MainMenu(shared_ptr<sf::RenderWindow> window) {
     }
 }
 
+/**
+ * @brief This is the game over menu (when player dies).
+ * @param window    window to draw game over menu
+ * @return          integer returned based on user selection
+ */
 int GameOver(shared_ptr<sf::RenderWindow> window) {
     // set background
     window->clear(sf::Color::Black);
@@ -81,7 +87,7 @@ int GameOver(shared_ptr<sf::RenderWindow> window) {
     title.setOrigin(title.getLocalBounds().width/2, title.getLocalBounds().height/2);
     title.setPosition(window->getSize().x/2, window->getSize().y/4);
 
-    // set up play button for main menu
+    // set up play button for game over menu
     sf::Texture playAgain;
     sf::Sprite playAgainButton;
     playAgain.loadFromFile("Resources/Images/playagain_button.png");
@@ -89,17 +95,13 @@ int GameOver(shared_ptr<sf::RenderWindow> window) {
     playAgainButton.setOrigin(playAgainButton.getLocalBounds().width/2, playAgainButton.getLocalBounds().height/2);
     playAgainButton.setPosition(window->getSize().x/2, (window->getSize().y/8)*5);
 
+    // set up exit button for game over menu
     sf::Texture exit;
     sf::Sprite exitButton;
     exit.loadFromFile("Resources/Images/exit_button.png");
     exitButton.setTexture(exit);
     exitButton.setOrigin(exitButton.getLocalBounds().width/2, exitButton.getLocalBounds().height/2);
     exitButton.setPosition(window->getSize().x/2, (window->getSize().y/8)*7);
-
-    window->draw(title);
-    window->draw(playAgainButton);
-    window->draw(exitButton);
-    window->display();
 
     sf::Event evt;
     while (1) {
@@ -108,7 +110,7 @@ int GameOver(shared_ptr<sf::RenderWindow> window) {
                 window->close();
                 return 0;
             }
-            else if (evt.type == sf::Event::MouseMoved) {
+            else if (evt.type == sf::Event::MouseMoved) { // when mouse hovers over selectable sprites
                 sf::Vector2f MPos;
                 MPos.x = sf::Mouse::getPosition(*window).x;
                 MPos.y = sf::Mouse::getPosition(*window).y;
@@ -123,7 +125,7 @@ int GameOver(shared_ptr<sf::RenderWindow> window) {
                     exitButton.setColor(sf::Color::White);
                 }
             }
-            else if (evt.type == sf::Event::MouseButtonPressed) {
+            else if (evt.type == sf::Event::MouseButtonPressed) { // when mouse clicks while hovering over selectable sprite
                 sf::Vector2f MPos;
                 MPos.x = sf::Mouse::getPosition(*window).x;
                 MPos.y = sf::Mouse::getPosition(*window).y;
@@ -144,6 +146,11 @@ int GameOver(shared_ptr<sf::RenderWindow> window) {
     }
 }
 
+/**
+ * @brief The Level Complete level.
+ * @param window    window to draw the level complete menu
+ * @return          return integer based on user selection
+ */
 int LevelComplete(shared_ptr<sf::RenderWindow> window) {
     // set background
     window->clear(sf::Color::Black);
@@ -156,7 +163,7 @@ int LevelComplete(shared_ptr<sf::RenderWindow> window) {
     title.setOrigin(title.getLocalBounds().width/2, title.getLocalBounds().height/2);
     title.setPosition(window->getSize().x/2, window->getSize().y/4);
 
-    // set up play button for main menu
+    // set up play button for level select menu
     sf::Texture playAgain;
     sf::Sprite playAgainButton;
     playAgain.loadFromFile("Resources/Images/playagain_button.png");
@@ -164,17 +171,13 @@ int LevelComplete(shared_ptr<sf::RenderWindow> window) {
     playAgainButton.setOrigin(playAgainButton.getLocalBounds().width/2, playAgainButton.getLocalBounds().height/2);
     playAgainButton.setPosition(window->getSize().x/2, (window->getSize().y/8)*5);
 
+    // set up exit button
     sf::Texture exit;
     sf::Sprite exitButton;
     exit.loadFromFile("Resources/Images/exit_button.png");
     exitButton.setTexture(exit);
     exitButton.setOrigin(exitButton.getLocalBounds().width/2, exitButton.getLocalBounds().height/2);
     exitButton.setPosition(window->getSize().x/2, (window->getSize().y/8)*7);
-
-    window->draw(title);
-    window->draw(playAgainButton);
-    window->draw(exitButton);
-    window->display();
 
     sf::Event evt;
     while (1) {
@@ -183,7 +186,7 @@ int LevelComplete(shared_ptr<sf::RenderWindow> window) {
                 window->close();
                 return 0;
             }
-            else if (evt.type == sf::Event::MouseMoved) {
+            else if (evt.type == sf::Event::MouseMoved) { // hover over selectable sprites
                 sf::Vector2f MPos;
                 MPos.x = sf::Mouse::getPosition(*window).x;
                 MPos.y = sf::Mouse::getPosition(*window).y;
@@ -198,7 +201,7 @@ int LevelComplete(shared_ptr<sf::RenderWindow> window) {
                     exitButton.setColor(sf::Color::White);
                 }
             }
-            else if (evt.type == sf::Event::MouseButtonPressed) {
+            else if (evt.type == sf::Event::MouseButtonPressed) {   // click mouse while hovering over selectable sprite
                 sf::Vector2f MPos;
                 MPos.x = sf::Mouse::getPosition(*window).x;
                 MPos.y = sf::Mouse::getPosition(*window).y;
@@ -219,6 +222,11 @@ int LevelComplete(shared_ptr<sf::RenderWindow> window) {
     }
 }
 
+/**
+ * @brief Pause menu to be used.
+ * @param window    the window to draw the pause menu onto
+ * @return          return integer based on pause menu selection from user
+ */
 int PauseMenu(std::shared_ptr<sf::RenderWindow> window) {
     // set background
     window->clear(sf::Color::Black);
@@ -231,7 +239,7 @@ int PauseMenu(std::shared_ptr<sf::RenderWindow> window) {
     title.setOrigin(title.getLocalBounds().width/2, title.getLocalBounds().height/2);
     title.setPosition(window->getSize().x/2, window->getSize().y/4);
 
-    // set up play button for main menu
+    // set up resume button
     sf::Texture resume;
     sf::Sprite resumeButton;
     resume.loadFromFile("Resources/Images/resume.png");
@@ -239,6 +247,7 @@ int PauseMenu(std::shared_ptr<sf::RenderWindow> window) {
     resumeButton.setOrigin(resumeButton.getLocalBounds().width/2, resumeButton.getLocalBounds().height/2);
     resumeButton.setPosition(window->getSize().x/2, (window->getSize().y/16)*9);
 
+    // set up level select button
     sf::Texture levelSelect;
     sf::Sprite levelSelectButton;
     levelSelect.loadFromFile("Resources/Images/levelSelect.png");
@@ -246,6 +255,7 @@ int PauseMenu(std::shared_ptr<sf::RenderWindow> window) {
     levelSelectButton.setOrigin(levelSelectButton.getLocalBounds().width/2, levelSelectButton.getLocalBounds().height/2);
     levelSelectButton.setPosition(window->getSize().x/2, (window->getSize().y/16)*11);
 
+    // set up main menu button
     sf::Texture mainMenu;
     sf::Sprite mainMenuButton;
     mainMenu.loadFromFile("Resources/Images/mainMenu.png");
@@ -253,19 +263,13 @@ int PauseMenu(std::shared_ptr<sf::RenderWindow> window) {
     mainMenuButton.setOrigin(mainMenuButton.getLocalBounds().width/2, mainMenuButton.getLocalBounds().height/2);
     mainMenuButton.setPosition(window->getSize().x/2, (window->getSize().y/16)*13);
 
+    // set up exit button
     sf::Texture exit;
     sf::Sprite exitButton;
     exit.loadFromFile("Resources/Images/exitGame.png");
     exitButton.setTexture(exit);
     exitButton.setOrigin(exitButton.getLocalBounds().width/2, exitButton.getLocalBounds().height/2);
     exitButton.setPosition(window->getSize().x/2, (window->getSize().y/16)*15);
-
-    window->draw(title);
-    window->draw(resumeButton);
-    window->draw(levelSelectButton);
-    window->draw(mainMenuButton);
-    window->draw(exitButton);
-    window->display();
 
     sf::Event evt;
     while (1) {
@@ -274,7 +278,7 @@ int PauseMenu(std::shared_ptr<sf::RenderWindow> window) {
                 window->close();
                 return 0;
             }
-            else if (evt.type == sf::Event::MouseMoved) {
+            else if (evt.type == sf::Event::MouseMoved) { // if mouse hovers over selectable sprite
                 sf::Vector2f MPos;
                 MPos.x = sf::Mouse::getPosition(*window).x;
                 MPos.y = sf::Mouse::getPosition(*window).y;
@@ -295,7 +299,7 @@ int PauseMenu(std::shared_ptr<sf::RenderWindow> window) {
                     exitButton.setColor(sf::Color::White);
                 }
             }
-            else if (evt.type == sf::Event::MouseButtonPressed) {
+            else if (evt.type == sf::Event::MouseButtonPressed) { // when mouse is clicked while hovering over selectable sprite
                 // to be added...Resume (to continue playing), Level Select, Help, Main Menu, Exit Game
                 sf::Vector2f MPos;
                 MPos.x = sf::Mouse::getPosition(*window).x;
@@ -325,6 +329,11 @@ int PauseMenu(std::shared_ptr<sf::RenderWindow> window) {
     }
 }
 
+/**
+ * @brief This is the pause menu while in level select.
+ * @param window    window to draw the pause menu for the level select.
+ * @return          return integer based on user selection
+ */
 int LevelSelectPause(std::shared_ptr<sf::RenderWindow> window) {
     // set background
     window->clear(sf::Color::Black);
@@ -337,7 +346,7 @@ int LevelSelectPause(std::shared_ptr<sf::RenderWindow> window) {
     title.setOrigin(title.getLocalBounds().width/2, title.getLocalBounds().height/2);
     title.setPosition(window->getSize().x/2, window->getSize().y/4);
 
-    // set up play button for main menu
+    // set up resume button
     sf::Texture resume;
     sf::Sprite resumeButton;
     resume.loadFromFile("Resources/Images/resume.png");
@@ -345,6 +354,7 @@ int LevelSelectPause(std::shared_ptr<sf::RenderWindow> window) {
     resumeButton.setOrigin(resumeButton.getLocalBounds().width/2, resumeButton.getLocalBounds().height/2);
     resumeButton.setPosition(window->getSize().x/2, (window->getSize().y/12)*7);
 
+    // set up main menu button
     sf::Texture mainMenu;
     sf::Sprite mainMenuButton;
     mainMenu.loadFromFile("Resources/Images/mainMenu.png");
@@ -352,6 +362,7 @@ int LevelSelectPause(std::shared_ptr<sf::RenderWindow> window) {
     mainMenuButton.setOrigin(mainMenuButton.getLocalBounds().width/2, mainMenuButton.getLocalBounds().height/2);
     mainMenuButton.setPosition(window->getSize().x/2, (window->getSize().y/12)*9);
 
+    // set up exit button
     sf::Texture exit;
     sf::Sprite exitButton;
     exit.loadFromFile("Resources/Images/exitGame.png");
@@ -410,17 +421,21 @@ int LevelSelectPause(std::shared_ptr<sf::RenderWindow> window) {
     }
 }
 
+/**
+ * @brief The Level Select Menu that will call and play a level for the user based on their selection.
+ * @param window    window to draw the level select menu
+ * @return          returns an integer based on user's action
+ */
 int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
 
-    User* user1 = new User("User1", window);
+    User* user1 = new User("User1", window); // open user's saved state
     vector<sf::Sprite> checks;
     vector<sf::Sprite> locks;
     vector<bool> visibleLevels;
     for (int i=0; i < 5; ++i) {
         visibleLevels.push_back(false);
     }
-
-    visibleLevels[0] = true;
+    visibleLevels[0] = true; // set only true for the first level so first level is playable
 
     // set up checkmarks
     sf::Texture check;
@@ -456,7 +471,7 @@ int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
     level5Check.setPosition((window->getSize().x/3)*2, (window->getSize().y/4)*3);
     checks.push_back(level5Check);
 
-    // set up checkmarks
+    // set up locks
     sf::Texture lock;
     lock.loadFromFile("Resources/Images/lock.png");
 
@@ -567,44 +582,45 @@ int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
                 sf::Vector2f MPos;
                 MPos.x = sf::Mouse::getPosition(*window).x;
                 MPos.y = sf::Mouse::getPosition(*window).y;
-                if (level1Box.getGlobalBounds().contains(MPos) && visibleLevels[0]) {
+                if (level1Box.getGlobalBounds().contains(MPos) && visibleLevels[0]) { //open level 1
                     Level* level = new Level(window, "level1");
                     int gameEvent = level->play(window);
-                    if (gameEvent == 0) {
+                    if (gameEvent == 0) { // if player dies
                         window->setView(sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y)));
                         int select = GameOver(window);
-                        if (select == 0) {
+                        if (select == 0) { // selected play again
                             continue;
                         }
-                        else if (select == 1) {
-                            user1->updateMeta();
+                        else if (select == 1) { // selected quit
+                            user1->updateMeta(); // update metadata to save the current state
                             return -1;
                         }
                     }
-                    else if (gameEvent == 1) {
+                    else if (gameEvent == 1) { // if player completes level
                         window->setView(sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y)));
-                        user1->saveState(1);
+                        user1->saveState(1); // update the save state to reflect completed level (ie. unlock new level)
                         int select = LevelComplete(window);
-                        if (select == 0) {
+                        if (select == 0) { // if player selects to play again
                             continue;
                         }
-                        else if (select == 1) {
+                        else if (select == 1) { // if player decides to quit
                             user1->updateMeta();
                             return -1;
                         }
                     }
-                    else if (gameEvent == 2) {
+                    else if (gameEvent == 2) { // if player goes to level select from pause menu
                         continue;
                     }
-                    else if (gameEvent == 3) {
+                    else if (gameEvent == 3) { // if player goes to main menu from pause menu
+                        user1->updateMeta();
                         return 0;
                     }
-                    else if (gameEvent == -1) {
+                    else if (gameEvent == -1) { // if player exits from pause menu
                         user1->updateMeta();
                         return -1; //game was closed
                     }
                 }
-                else if (level2Box.getGlobalBounds().contains(MPos) && visibleLevels[1]) {
+                else if (level2Box.getGlobalBounds().contains(MPos) && visibleLevels[1]) { // same comments as the first level for the rest of the level blocks
                     Level* level = new Level(window, "level2");
                     int gameEvent = level->play(window);
                     if (gameEvent == 0) {
@@ -634,6 +650,7 @@ int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
                         continue;
                     }
                     else if (gameEvent == 3) {
+                        user1->updateMeta();
                         return 0;
                     }
                     else if (gameEvent == -1) {
@@ -671,6 +688,7 @@ int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
                         continue;
                     }
                     else if (gameEvent == 3) {
+                        user1->updateMeta();
                         return 0;
                     }
                     else if (gameEvent == -1) {
@@ -708,6 +726,7 @@ int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
                         continue;
                     }
                     else if (gameEvent == 3) {
+                        user1->updateMeta();
                         return 0;
                     }
                     else if (gameEvent == -1) {
@@ -745,6 +764,7 @@ int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
                         continue;
                     }
                     else if (gameEvent == 3) {
+                        user1->updateMeta();
                         return 0;
                     }
                     else if (gameEvent == -1) {
@@ -753,15 +773,16 @@ int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
                     }
                 }
             }
-            else if (evt.type == sf::Event::KeyPressed) {
+            else if (evt.type == sf::Event::KeyPressed) { // if user selects escape from level select
                 if (evt.key.scancode == sf::Keyboard::Scan::Escape) {
                     window->setView(sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y)));
                     int pauseSelect = LevelSelectPause(window);
                     if (pauseSelect == 2) {
                         // open main menu again
+                        user1->updateMeta();
                         return 0;
                     }
-                    else if (pauseSelect == -1) {
+                    else if (pauseSelect == -1) { // exit game
                         user1->updateMeta();
                         return -1;
                     }
@@ -778,7 +799,7 @@ int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
 
             int numLevels = user1->getNumAccessibleLevels();
             int counter = 0;
-            for (int i = 0; i < numLevels-1; i++) {
+            for (int i = 0; i < numLevels-1; i++) { // check what levels have been completed
                 window->draw(checks[i]);
                 counter++;
                 visibleLevels[i] = true;
@@ -786,7 +807,7 @@ int LevelSelectMenu(std::shared_ptr<sf::RenderWindow> window) {
             visibleLevels[numLevels-1] = true;
             counter += 1;
 
-            for (int i=5; i > counter; i--) {
+            for (int i=5; i > counter; i--) { // lock what levels cannot be accessed
                 window->draw(locks[i-1]);
             }
 

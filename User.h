@@ -1,6 +1,9 @@
-//
-// Created by Jake Choi on 2023-11-28.
-//
+/**
+ * @file User.h
+ * @brief Header file for User.cpp
+ * @author Jake
+ * @bug no known bugs
+ */
 
 #ifndef PLATFORMER_USER_H
 #define PLATFORMER_USER_H

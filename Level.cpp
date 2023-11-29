@@ -10,36 +10,49 @@
 
 using namespace std;
 
+/**
+ * @brief Create the level object of the specific level.
+ *
+ * @param window        the window to draw the level and objects to
+ * @param levelName     the name of the level (to load the specific level png)
+ */
 Level::Level(shared_ptr<sf::RenderWindow> window, string levelName) {
 
     string currLevelName = levelName;
     levelName.erase(0, 5);
-    levelNum = stoi(levelName);
+    levelNum = stoi(levelName); // track level number to be used in another class
     gameClock; //start the game clock to time physics
 
     backgroundTexture.loadFromFile("Resources/Images/Background.png");
 
-    load(currLevelName);
-    //player = new Player(start, size, sf::Vector2f(GRIDSIZE, GRIDSIZE)); //initialize player
+    load(currLevelName); //call function to load in specific level
 
     for (int i=0; i<enemyStartPositions.size(); i++) {  // initialise enemies
         enemies.push_back(enemy = new Enemy(*enemyStartPositions.at(i), *enemyEndPositions.at(i), size, sf::Vector2f(GRIDSIZE, GRIDSIZE/2)));
     }
 
-    //floor = sf::RectangleShape(sf::Vector2f(size.x, 5*GRIDSIZE));
-    //floor.setPosition(sf::Vector2f(0, size.y));
     player = new Player(start, size, sf::Vector2f(GRIDSIZE, 2*GRIDSIZE)); //initialize player
 
-    camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
+    camera = new sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y)); //set camera
 
 }
 
+/**
+ * @brief Returns the level number of the current level
+ *
+ * @return  the level number (ie. number between 1 and 5)
+ */
 int Level::getLevel() {
     return levelNum;
 }
 
+/**
+ * @brief The main function where the collisions and frame drawing occurs.
+ *
+ * @param window    window to draw the objects to
+ * @return          returns an integer based on the actions in the game (ie. death, completing the game, or pausing the game)
+ */
 int Level::play(shared_ptr<sf::RenderWindow> window) {
-    sf::Event event;
     while (window->isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
@@ -56,13 +69,14 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                      window->setView(sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y)));
                      int pauseSelect = PauseMenu(window);
                      if (pauseSelect == 1) {
+                         // go to level select menu
                          return 2;
                      }
                      else if (pauseSelect == 2) {
                          // open main menu again
                          return 3;
                      }
-                     else if (pauseSelect == -1) {
+                     else if (pauseSelect == -1) { //close game
                          window->close();
                          return -1;
                      }
@@ -73,64 +87,45 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         window->clear(sf::Color(45,33,21));
 
         bool deathCollision = false;
+
+        /**
+         * The following for loops are all checking the player's collission with different objects in the game.
+         */
+
         for (int i=0; i<deathObjects.size(); i++) {
-            /**
-             * Want to change to checking first if in current view, then check for collision.
-             * Will leave for later.
-             */
             if (player->collides(deathObjects.at(i))) {
                 return 0;
             }
         }
+
         for (int i=0; i<rewardObjects.size(); i++) {
-            /**
-             * Want to change to checking first if in current view, then check for collision.
-             * Will leave for later.
-             */
             if (player->collides(rewardObjects.at(i))) {
                 rewardObjects.at(i)->collect(); // Hide coin
                 coinsCollect=true;
                 scoreObjects.at(i)->show();
             }
         }
+
         for (int i=0; i<scoreObjects.size(); i++) {// Hide score
-            /**
-             * Want to change to checking first if in current view, then check for collision.
-             * Will leave for later.
-             */
             if (coinsCollect==false){
                 scoreObjects.at(i)->collect();
             }
-
         }
 
-
         for (int i=0; i<terrain.size(); i++) {
-            /**
-             * Want to change to checking first if in current view, then check for collision.
-             * Will leave for later.
-             */
             if (player->collides(terrain.at(i))) {
                 player->collided(terrain.at(i));
             }
         }
+
         for (int i=0; i<goals.size(); i++) {
-            /**
-             * Want to change to checking first if in current view, then check for collision.
-             * Will leave for later.
-             */
             if (player->collides(goals.at(i))) {
                 return 1;
             }
         }
 
         for (int i=0; i<enemies.size(); i++) {
-            /**
-             * Want to change to checking first if in current view, then check for collision.
-             * Will leave for later.
-             */
             if (player->collides(enemies.at(i))) {
-
                 // player kills enemy by colliding with enemy from top
                 if (player->getPrevPosition().y+player->getSize().y < enemies.at(i)->getPositionY()) {
                     enemies.at(i)->getShape()->setFillColor(sf::Color::Transparent);
@@ -139,7 +134,6 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
                 else {
                     return 0;       // any other kind of collision causes death
                 }
-
             }
         }
 
@@ -149,12 +143,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         player->Update(elapsed);
 
         for (int i=0; i<enemies.size(); i++) {
-            /**
-             * Want to change to checking first if in current view, then check for collision.
-             * Will leave for later.
-             */
             enemies.at(i)->Update(elapsed);
-
         }
 
         //center the camera on the player
@@ -164,9 +153,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         //draw the objects in the game
         for (int i=0; i<backgrounds.size(); ++i) {
             window->draw(*backgrounds.at(i));
-            //cout<<backgrounds.at(i)->getPosition().x<<endl;
         }
-        //window->draw(floor);
         window->draw(*player->getShape());
         for (int i=0; i<deathObjects.size(); i++) {
             window->draw(*deathObjects.at(i)->getShape());
@@ -183,7 +170,7 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         for (int i=0; i<goals.size(); i++) {
             window->draw(*goals.at(i)->getShape());
         }
-     //   window->draw(scoring->getScore());
+        // window->draw(scoring->getScore());
         for (int i=0; i<enemies.size(); i++) {
             window->draw(*enemies.at(i)->getShape());
         }
@@ -191,7 +178,6 @@ int Level::play(shared_ptr<sf::RenderWindow> window) {
         // end the current frame
         window->display();
     }
-
     return -1;
 }
 
